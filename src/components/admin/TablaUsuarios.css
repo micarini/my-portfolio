@@ -1,0 +1,103 @@
+/* TablaUsuarios.css — tabla brutalista de solo lectura */
+
+/* Contenedor con scroll horizontal en mobile */
+.tabla-scroll {
+  overflow-x: auto;
+  border: var(--border-heavy);
+  box-shadow: var(--shadow-hard);
+}
+
+/* Tabla base brutalista */
+.tabla-brutal {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  background: var(--color-paper);
+}
+
+/* Encabezados: fondo negro, texto crema, mayúsculas mono */
+.tabla-brutal thead tr {
+  background: var(--color-ink);
+}
+
+.tabla-brutal th {
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-align: left;
+  padding: 0.65rem var(--space-2);
+  border: 2px solid var(--color-paper);
+  border-bottom: var(--border-heavy);
+  white-space: nowrap;
+}
+
+/* Celdas */
+.tabla-brutal td {
+  padding: 0.55rem var(--space-2);
+  border: var(--border-thick);
+  vertical-align: middle;
+  color: var(--color-ink);
+  line-height: 1.4;
+}
+
+/* Fila alternada */
+.tabla-brutal tbody tr:nth-child(even) {
+  background: var(--color-paper-dark);
+}
+
+.tabla-brutal tbody tr:hover {
+  background: rgba(255, 77, 0, 0.07);
+}
+
+/* Nombre del usuario */
+.tabla-nombre {
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  font-size: var(--text-body);
+}
+
+/* Celdas monospace */
+.tabla-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+}
+
+.tabla-num {
+  text-align: right;
+  font-weight: 700;
+}
+
+/* Badges de estado */
+.tabla-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.1rem 0.45rem;
+  border: var(--border-thick);
+}
+
+.tabla-badge--admin {
+  background: var(--color-ink);
+  color: var(--color-electric);
+  border-color: var(--color-ink);
+}
+
+.tabla-badge--ok {
+  background: var(--color-electric);
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.tabla-badge--no {
+  background: transparent;
+  color: var(--color-sepia);
+  border-color: var(--color-sepia);
+  opacity: 0.5;
+}

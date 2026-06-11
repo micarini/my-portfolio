@@ -1,0 +1,272 @@
+/* =====================================================
+   DEMO 01: SESGO DEL ALGORITMO — Feed simulado
+   ===================================================== */
+
+.sesgo-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* --- Controles --- */
+.sesgo-controles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: var(--border-heavy);
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.sesgo-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.15em;
+  color: var(--color-orange);
+}
+
+.sesgo-slider-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sesgo-valor-extremo {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-paper-dark);
+  min-width: 2ch;
+}
+
+.sesgo-presion-display {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.sesgo-num {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--color-orange);
+  line-height: 1;
+}
+
+.sesgo-unit {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-paper-dark);
+}
+
+/* --- Slider brutalista --- */
+.slider-brutal {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 0;
+  background: var(--color-paper-dark);
+  border: var(--border-thick);
+  outline: none;
+  cursor: pointer;
+}
+
+.slider-brutal::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 0;
+  background: var(--color-orange);
+  border: 2px solid var(--color-ink);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--color-ink);
+  transition: transform 120ms ease;
+}
+
+.slider-brutal::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 0;
+  background: var(--color-orange);
+  border: 2px solid var(--color-ink);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+.slider-brutal::-webkit-slider-thumb:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+/* --- Métricas --- */
+.sesgo-metricas {
+  display: flex;
+  gap: 2px;
+}
+
+.sesgo-metrica {
+  flex: 1;
+  padding: var(--space-2);
+  border: var(--border-thick);
+  background: var(--color-paper-dark);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sesgo-metrica--danger { border-color: var(--color-danger); }
+.sesgo-metrica--ok    { border-color: var(--color-electric); }
+
+.sesgo-metrica-num {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  line-height: 1;
+}
+
+.sesgo-metrica--danger .sesgo-metrica-num { color: var(--color-danger); }
+.sesgo-metrica--ok    .sesgo-metrica-num  { color: var(--color-electric); }
+
+.sesgo-metrica-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sepia);
+  line-height: 1.3;
+}
+
+/* --- Feed simulado --- */
+.sesgo-feed {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: var(--border-thick);
+  background: var(--color-paper-dark);
+  min-height: 280px;
+}
+
+/* --- Tarjeta individual --- */
+.sesgo-tarjeta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-1);
+  border: var(--border-thick);
+  background: var(--color-paper);
+  transform-origin: center top;
+  /* transition en el componente via style inline */
+}
+
+/* Ilustración CSS del rostro */
+.rostro-css {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+.rostro-pelo {
+  width: 56px;
+  height: 20px;
+}
+
+.rostro-cara {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 8px 6px;
+  transition: width 300ms ease, height 300ms ease, background-color 300ms ease, border-radius 300ms ease;
+}
+
+.rostro-ojos {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.rostro-ojo {
+  background: #111;
+  border-radius: 50%;
+  transition: width 300ms ease, height 300ms ease;
+}
+
+/* Tamaño de ojos según forma */
+.rostro-ojos--grande .rostro-ojo  { width: 8px;  height: 9px;  }
+.rostro-ojos--medio .rostro-ojo   { width: 6px;  height: 7px;  }
+.rostro-ojos--almendra .rostro-ojo { width: 8px; height: 5px; border-radius: 40%; }
+
+.rostro-nariz {
+  width: 6px;
+  height: 8px;
+  border-radius: 0 0 3px 3px;
+  transition: background-color 300ms ease;
+}
+
+.rostro-boca {
+  width: 16px;
+  height: 4px;
+  background: #111;
+  border-radius: 0 0 4px 4px;
+}
+
+.sesgo-tarjeta-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sesgo-tarjeta-nombre {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sesgo-tarjeta-canon {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--color-sepia);
+}
+
+/* --- Advertencia --- */
+.sesgo-advertencia {
+  padding: var(--space-2) var(--space-3);
+  border: 3px solid var(--color-danger);
+  background: var(--color-danger);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  line-height: 1.5;
+  animation: fadeIn 300ms ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 720px) {
+  .sesgo-feed {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-1);
+  }
+
+  .sesgo-metricas {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sesgo-feed {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

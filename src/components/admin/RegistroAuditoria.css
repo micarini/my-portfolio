@@ -1,0 +1,128 @@
+/* RegistroAuditoria.css — terminal de auditoría fondo negro / verde eléctrico */
+
+.auditoria-wrapper {
+  border: var(--border-heavy);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+}
+
+/* Barra superior del terminal */
+.auditoria-header {
+  background: var(--color-ink);
+  color: var(--color-electric);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.5rem var(--space-2);
+  border-bottom: 2px solid var(--color-electric);
+  font-family: var(--font-mono);
+}
+
+.auditoria-prompt {
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.auditoria-titulo {
+  font-size: var(--text-small);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.auditoria-count {
+  font-size: var(--text-micro);
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+}
+
+/* Área del terminal */
+.auditoria-terminal {
+  background: #0a0a0a;
+  color: var(--color-electric);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  padding: var(--space-2);
+  min-height: 120px;
+  max-height: 260px;
+  overflow-y: auto;
+  line-height: 1.8;
+  /* scrollbar estilo terminal */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-electric) #0a0a0a;
+}
+
+.auditoria-terminal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.auditoria-terminal::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+.auditoria-terminal::-webkit-scrollbar-thumb {
+  background: var(--color-electric);
+}
+
+/* Estado vacío */
+.auditoria-vacio {
+  opacity: 0.4;
+  font-style: italic;
+}
+
+.auditoria-cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  margin-right: 0.4rem;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Partes de cada línea de log */
+.auditoria-linea {
+  word-break: break-all;
+}
+
+.auditoria-ts {
+  color: rgba(0, 224, 90, 0.4);
+  font-size: var(--text-micro);
+}
+
+/* Verbo coloreado según acción */
+.auditoria-action {
+  font-weight: 700;
+}
+
+.auditoria-action--create {
+  color: var(--color-electric);
+}
+
+.auditoria-action--update {
+  color: var(--color-orange);
+}
+
+.auditoria-action--delete {
+  color: var(--color-danger);
+}
+
+.auditoria-entity {
+  color: #88cfaa;
+}
+
+.auditoria-author {
+  color: rgba(0, 224, 90, 0.6);
+}
+
+.auditoria-payload {
+  color: #d4c89a;
+  font-style: italic;
+}
+
+.auditoria-payload--del {
+  color: var(--color-danger);
+  text-decoration: line-through;
+}

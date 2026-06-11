@@ -1,0 +1,29 @@
+[
+  {
+    "name": "mia",
+    "password": "umai2026",
+    "email": "mia@portfolio.com",
+    "isSubscribed": true,
+    "isAdmin": true,
+    "registerDate": "2026-03-02",
+    "likedPostIDs": [1, 3, 4]
+  },
+  {
+    "name": "valentina",
+    "password": "valen123",
+    "email": "valentina@correo.com",
+    "isSubscribed": true,
+    "isAdmin": false,
+    "registerDate": "2026-03-15",
+    "likedPostIDs": [2, 4]
+  },
+  {
+    "name": "tomas",
+    "password": "tomas456",
+    "email": "tomas@correo.com",
+    "isSubscribed": false,
+    "isAdmin": false,
+    "registerDate": "2026-04-08",
+    "likedPostIDs": [3]
+  }
+]

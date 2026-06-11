@@ -1,0 +1,165 @@
+/* LoginForm.css — ficha/carnet de acceso, centrado, brutalismo suizo */
+
+.login-wrapper {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-2);
+  /* textura diagonal sutil de fondo */
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 12px,
+    rgba(17, 17, 17, 0.04) 12px,
+    rgba(17, 17, 17, 0.04) 14px
+  );
+}
+
+/* Tarjeta tipo ficha de imprenta */
+.login-ficha {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-paper);
+  border: var(--border-heavy);
+  box-shadow: var(--shadow-hard-lg);
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Encabezado negro contrastante */
+.login-header {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: var(--space-3) var(--space-3) var(--space-2);
+  border-bottom: var(--border-heavy);
+  position: relative;
+}
+
+.login-stamp {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-electric);
+  margin-bottom: var(--space-1);
+}
+
+.login-titulo {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+  /* franja naranja decorativa */
+  -webkit-text-stroke: 2px var(--color-orange);
+}
+
+.login-subtitulo {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-paper-dark);
+  margin-top: var(--space-1);
+  opacity: 0.7;
+}
+
+/* Cuerpo del formulario */
+.login-form {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.login-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.login-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--color-sepia);
+  text-transform: uppercase;
+}
+
+.login-input {
+  width: 100%;
+  padding: 0.65rem var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-body);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 100ms;
+}
+
+.login-input:focus {
+  outline: 3px solid var(--color-orange);
+  outline-offset: 0px;
+  border-color: var(--color-orange);
+}
+
+.login-input::placeholder {
+  color: rgba(17, 17, 17, 0.3);
+  font-style: italic;
+}
+
+/* Bloque de error: rojo duro, sin adornos */
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: var(--color-danger);
+  color: var(--color-paper);
+  border: var(--border-thick);
+  padding: 0.55rem var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: 700;
+}
+
+.login-error-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: var(--color-paper);
+  color: var(--color-danger);
+  font-weight: 900;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.login-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  padding: 0.85rem;
+  font-size: var(--text-body);
+  margin-top: var(--space-1);
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-hard);
+}
+
+/* Pie */
+.login-pie {
+  padding: var(--space-1) var(--space-3);
+  border-top: var(--border-thick);
+  background: var(--color-paper-dark);
+  display: flex;
+  justify-content: flex-end;
+}

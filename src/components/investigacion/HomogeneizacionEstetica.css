@@ -1,0 +1,225 @@
+/* =====================================================
+   DEMO 03: HOMOGENEIZACIÓN ESTÉTICA — Instagram Face
+   ===================================================== */
+
+.homo-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* --- Controles --- */
+.homo-controles {
+  border: var(--border-heavy);
+  background: var(--color-paper-dark);
+}
+
+.homo-controles-inner {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.homo-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-sepia);
+}
+
+.homo-slider-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.homo-extremo {
+  font-family: var(--font-display);
+  font-size: var(--text-small);
+  min-width: 1.5ch;
+  color: var(--color-sepia);
+}
+
+.homo-stats {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.homo-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.homo-stat strong {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  line-height: 1;
+  transition: color 250ms ease;
+}
+
+.homo-stat small {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sepia);
+}
+
+/* --- Fila de rostros --- */
+.homo-fila {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: var(--border-thick);
+  background: var(--color-paper-dark);
+  overflow-x: auto;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.homo-tarjeta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+/* Rostro CSS */
+.homo-rostro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.homo-pelo {
+  height: 18px;
+  transition: all 250ms ease;
+}
+
+.homo-cara {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 8px 10px;
+  min-height: 100px;
+  border: 1px solid rgba(17,17,17,0.2);
+  transition: all 250ms ease;
+}
+
+.homo-ojos {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.homo-ojo {
+  background: #111;
+  border-radius: 50%;
+  transition: all 250ms ease;
+}
+
+.homo-nariz {
+  height: 8px;
+  border-radius: 0 0 3px 3px;
+  transition: all 250ms ease;
+}
+
+.homo-boca {
+  width: 18px;
+  height: 5px;
+  border-radius: 0 0 4px 4px;
+  transition: all 250ms ease;
+}
+
+.homo-num {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--color-sepia);
+  letter-spacing: 0.1em;
+}
+
+/* --- Alerta de convergencia --- */
+.homo-convergencia-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 3px solid var(--color-danger);
+  background: var(--color-danger);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  line-height: 1.5;
+  animation: slideIn 300ms ease;
+}
+
+.homo-convergencia-icon {
+  font-size: var(--text-h2);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Cita editorial --- */
+.homo-cita {
+  border-left: 6px solid var(--color-ink);
+  border-top: var(--border-thick);
+  border-right: var(--border-thick);
+  border-bottom: var(--border-thick);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  box-shadow: var(--shadow-hard-lg);
+  margin: 0;
+}
+
+.homo-cita-texto {
+  font-family: var(--font-grotesk);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.55;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-2);
+}
+
+.homo-cita-fuente {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-paper-dark);
+  line-height: 1.5;
+}
+
+.homo-cita-fuente cite {
+  font-style: normal;
+  color: var(--color-orange);
+}
+
+/* --- Responsive --- */
+@media (max-width: 720px) {
+  .homo-fila {
+    justify-content: flex-start;
+    padding: var(--space-2);
+    gap: var(--space-1);
+  }
+
+  .homo-stats {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .homo-cita {
+    padding: var(--space-3) var(--space-2);
+  }
+}

@@ -1,0 +1,335 @@
+/* TablaContenido.css — tabla CRUD + formulario brutalista */
+
+/* Contenedor general */
+.tc-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Toolbar superior */
+.tc-toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Formulario ─────────────────────────────────────── */
+
+.tc-form {
+  background: var(--color-paper);
+  border: var(--border-heavy);
+  box-shadow: var(--shadow-hard-lg);
+}
+
+/* Encabezado del form: negro con título */
+.tc-form-header {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border-bottom: var(--border-heavy);
+}
+
+.tc-form-titulo {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-electric);
+}
+
+.tc-form-cerrar {
+  font-size: var(--text-micro);
+  padding: 0.3rem 0.7rem;
+  background: transparent;
+  color: var(--color-paper);
+  border-color: var(--color-paper);
+  box-shadow: none;
+}
+
+.tc-form-cerrar:hover {
+  background: var(--color-danger);
+  color: var(--color-paper);
+  border-color: var(--color-danger);
+}
+
+/* Grilla del formulario */
+.tc-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+}
+
+.tc-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.tc-campo--full {
+  grid-column: 1 / -1;
+}
+
+.tc-campo--check {
+  align-self: end;
+  padding-bottom: 0.4rem;
+}
+
+/* Labels */
+.tc-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--color-sepia);
+  text-transform: uppercase;
+}
+
+.tc-label-hint {
+  font-weight: 400;
+  opacity: 0.6;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Label con checkbox */
+.tc-label-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--color-sepia);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* Inputs */
+.tc-input {
+  width: 100%;
+  padding: 0.55rem var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 100ms;
+}
+
+.tc-input:focus {
+  outline: 3px solid var(--color-orange);
+  outline-offset: 0px;
+  border-color: var(--color-orange);
+}
+
+.tc-input::placeholder {
+  color: rgba(17, 17, 17, 0.3);
+}
+
+.tc-textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.tc-checkbox {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-orange);
+  cursor: pointer;
+}
+
+/* Acciones del formulario */
+.tc-form-actions {
+  padding: var(--space-2) var(--space-3);
+  border-top: var(--border-thick);
+  display: flex;
+  gap: var(--space-2);
+  background: var(--color-paper-dark);
+}
+
+/* ── Tabla ─────────────────────────────────────────── */
+
+/* Reglas base de tabla brutalista (autónomas, no dependen de TablaUsuarios.css) */
+
+.tabla-scroll {
+  overflow-x: auto;
+  border: var(--border-heavy);
+  box-shadow: var(--shadow-hard);
+}
+
+.tabla-brutal {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  background: var(--color-paper);
+}
+
+.tabla-brutal thead tr {
+  background: var(--color-ink);
+}
+
+.tabla-brutal th {
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-align: left;
+  padding: 0.65rem var(--space-2);
+  border: 2px solid var(--color-paper);
+  border-bottom: var(--border-heavy);
+  white-space: nowrap;
+}
+
+.tabla-brutal td {
+  padding: 0.55rem var(--space-2);
+  border: var(--border-thick);
+  vertical-align: middle;
+  color: var(--color-ink);
+  line-height: 1.4;
+}
+
+.tabla-brutal tbody tr:nth-child(even) {
+  background: var(--color-paper-dark);
+}
+
+.tabla-brutal tbody tr:hover {
+  background: rgba(255, 77, 0, 0.07);
+}
+
+.tabla-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+}
+
+.tabla-num {
+  text-align: right;
+  font-weight: 700;
+}
+
+.tabla-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.1rem 0.45rem;
+  border: var(--border-thick);
+}
+
+.tabla-badge--admin {
+  background: var(--color-ink);
+  color: var(--color-electric);
+  border-color: var(--color-ink);
+}
+
+.tabla-badge--no {
+  background: transparent;
+  color: var(--color-sepia);
+  border-color: var(--color-sepia);
+  opacity: 0.5;
+}
+
+/* Parches específicos de contenido */
+
+.tc-vacio {
+  text-align: center;
+  padding: var(--space-4) !important;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-sepia);
+  opacity: 0.5;
+}
+
+.tc-id {
+  text-align: right;
+  opacity: 0.5;
+  font-size: var(--text-micro);
+}
+
+/* Celda título + descripción abreviada */
+.tc-titulo-celda {
+  display: block;
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  font-size: var(--text-body);
+}
+
+.tc-desc-celda {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--color-sepia);
+  opacity: 0.7;
+  margin-top: 0.15rem;
+}
+
+/* Tags en celda */
+.tc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.tc-tag-item {
+  font-size: 0.55rem;
+}
+
+/* Celda de acciones */
+.tc-acciones {
+  white-space: nowrap;
+}
+
+/* Confirmación inline de borrado */
+.tc-confirm {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tc-confirm-texto {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-danger);
+  font-weight: 700;
+}
+
+/* Botones pequeños para dentro de la tabla */
+.tc-btn-sm {
+  padding: 0.25rem 0.55rem !important;
+  font-size: var(--text-micro) !important;
+  box-shadow: 2px 2px 0px var(--color-ink);
+}
+
+/* Fila en edición: fondo tenue */
+.tc-fila-activa {
+  background: rgba(255, 77, 0, 0.08) !important;
+  outline: 2px solid var(--color-orange);
+  outline-offset: -2px;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .tc-form-grid {
+    grid-template-columns: 1fr;
+    padding: var(--space-2);
+  }
+
+  .tc-campo--full {
+    grid-column: 1;
+  }
+}
