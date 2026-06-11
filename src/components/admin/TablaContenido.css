@@ -1,168 +1,29 @@
-/* TablaContenido.css — tabla CRUD + formulario brutalista */
+/* TablaContenido.css — tabla CRUD de contenido con formularios inline */
 
-/* Contenedor general */
+/* ── Wrapper ─────────────────────────────────────── */
+
 .tc-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
-/* Toolbar superior */
-.tc-toolbar {
+/* ── Acciones superiores ─────────────────────────── */
+
+.tc-acciones-top {
   display: flex;
   justify-content: flex-end;
 }
 
-/* ── Formulario ─────────────────────────────────────── */
-
-.tc-form {
-  background: var(--color-paper);
-  border: var(--border-heavy);
-  box-shadow: var(--shadow-hard-lg);
+.tc-btn-nuevo {
+  letter-spacing: 0.1em;
 }
 
-/* Encabezado del form: negro con título */
-.tc-form-header {
-  background: var(--color-ink);
-  color: var(--color-paper);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-1) var(--space-2);
-  border-bottom: var(--border-heavy);
-}
+/* ── Tabla base (reutiliza .tabla-brutal de TablaUsuarios) ── */
 
-.tc-form-titulo {
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-electric);
-}
-
-.tc-form-cerrar {
-  font-size: var(--text-micro);
-  padding: 0.3rem 0.7rem;
-  background: transparent;
-  color: var(--color-paper);
-  border-color: var(--color-paper);
-  box-shadow: none;
-}
-
-.tc-form-cerrar:hover {
-  background: var(--color-danger);
-  color: var(--color-paper);
-  border-color: var(--color-danger);
-}
-
-/* Grilla del formulario */
-.tc-form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-}
-
-.tc-campo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.tc-campo--full {
-  grid-column: 1 / -1;
-}
-
-.tc-campo--check {
-  align-self: end;
-  padding-bottom: 0.4rem;
-}
-
-/* Labels */
-.tc-label {
-  font-family: var(--font-mono);
-  font-size: var(--text-micro);
-  letter-spacing: 0.14em;
-  font-weight: 700;
-  color: var(--color-sepia);
-  text-transform: uppercase;
-}
-
-.tc-label-hint {
-  font-weight: 400;
-  opacity: 0.6;
-  text-transform: none;
-  letter-spacing: 0;
-}
-
-/* Label con checkbox */
-.tc-label-check {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: var(--text-micro);
-  letter-spacing: 0.14em;
-  font-weight: 700;
-  color: var(--color-sepia);
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-/* Inputs */
-.tc-input {
-  width: 100%;
-  padding: 0.55rem var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  color: var(--color-ink);
-  background: var(--color-paper);
-  border: 2px solid var(--color-ink);
-  border-radius: 0;
-  outline: none;
-  transition: border-color 100ms;
-}
-
-.tc-input:focus {
-  outline: 3px solid var(--color-orange);
-  outline-offset: 0px;
-  border-color: var(--color-orange);
-}
-
-.tc-input::placeholder {
-  color: rgba(17, 17, 17, 0.3);
-}
-
-.tc-textarea {
-  resize: vertical;
-  min-height: 80px;
-  line-height: 1.5;
-}
-
-.tc-checkbox {
-  width: 1.1rem;
-  height: 1.1rem;
-  accent-color: var(--color-orange);
-  cursor: pointer;
-}
-
-/* Acciones del formulario */
-.tc-form-actions {
-  padding: var(--space-2) var(--space-3);
-  border-top: var(--border-thick);
-  display: flex;
-  gap: var(--space-2);
-  background: var(--color-paper-dark);
-}
-
-/* ── Tabla ─────────────────────────────────────────── */
-
-/* Reglas base de tabla brutalista (autónomas, no dependen de TablaUsuarios.css) */
-
-.tabla-scroll {
+.tabla-overflow {
   overflow-x: auto;
-  border: var(--border-heavy);
-  box-shadow: var(--shadow-hard);
+  -webkit-overflow-scrolling: touch;
 }
 
 .tabla-brutal {
@@ -170,166 +31,293 @@
   border-collapse: collapse;
   font-family: var(--font-mono);
   font-size: var(--text-small);
-  background: var(--color-paper);
+  min-width: 780px;
 }
 
 .tabla-brutal thead tr {
   background: var(--color-ink);
+  color: var(--color-paper);
 }
 
-.tabla-brutal th {
-  color: var(--color-paper);
+.tabla-brutal thead th {
+  border: var(--border-thick);
+  border-color: var(--color-ink);
+  padding: 0.65rem 0.9rem;
   font-family: var(--font-mono);
   font-size: var(--text-micro);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   text-align: left;
-  padding: 0.65rem var(--space-2);
-  border: 2px solid var(--color-paper);
-  border-bottom: var(--border-heavy);
   white-space: nowrap;
 }
 
-.tabla-brutal td {
-  padding: 0.55rem var(--space-2);
+.tabla-brutal tbody td {
   border: var(--border-thick);
+  padding: 0.55rem 0.9rem;
   vertical-align: middle;
-  color: var(--color-ink);
-  line-height: 1.4;
+  background: var(--color-paper);
 }
 
-.tabla-brutal tbody tr:nth-child(even) {
+.tc-fila--destacado td {
   background: var(--color-paper-dark);
 }
 
-.tabla-brutal tbody tr:hover {
-  background: rgba(255, 77, 0, 0.07);
+.tabla-brutal tbody tr:hover td {
+  background: #ede3cc;
 }
 
-.tabla-mono {
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
+/* Fila en edición: fondo neutro para el formulario */
+.tc-fila--editando td {
+  background: var(--color-paper-dark) !important;
+  padding: 0;
 }
 
-.tabla-num {
-  text-align: right;
-  font-weight: 700;
-}
+/* ── Tipos de celda ──────────────────────────────── */
 
-.tabla-badge {
-  display: inline-block;
-  font-family: var(--font-mono);
+.tc-celda--id {
   font-size: var(--text-micro);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0.1rem 0.45rem;
-  border: var(--border-thick);
-}
-
-.tabla-badge--admin {
-  background: var(--color-ink);
-  color: var(--color-electric);
-  border-color: var(--color-ink);
-}
-
-.tabla-badge--no {
-  background: transparent;
   color: var(--color-sepia);
-  border-color: var(--color-sepia);
-  opacity: 0.5;
-}
-
-/* Parches específicos de contenido */
-
-.tc-vacio {
+  opacity: 0.6;
+  width: 40px;
   text-align: center;
-  padding: var(--space-4) !important;
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  color: var(--color-sepia);
-  opacity: 0.5;
 }
 
-.tc-id {
-  text-align: right;
-  opacity: 0.5;
-  font-size: var(--text-micro);
-}
-
-/* Celda título + descripción abreviada */
-.tc-titulo-celda {
-  display: block;
-  font-family: var(--font-grotesk);
+.tc-celda--titulo {
   font-weight: 700;
-  font-size: var(--text-body);
+  font-size: var(--text-small);
+  min-width: 140px;
+  max-width: 220px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
-.tc-desc-celda {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: var(--text-micro);
-  color: var(--color-sepia);
-  opacity: 0.7;
-  margin-top: 0.15rem;
-}
-
-/* Tags en celda */
-.tc-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-}
-
-.tc-tag-item {
-  font-size: 0.55rem;
-}
-
-/* Celda de acciones */
-.tc-acciones {
+.tc-celda--cat {
   white-space: nowrap;
 }
 
-/* Confirmación inline de borrado */
-.tc-confirm {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
+.tc-celda--anio {
+  text-align: center;
+  white-space: nowrap;
+  width: 60px;
 }
 
-.tc-confirm-texto {
+.tc-celda--tags {
+  min-width: 120px;
+  max-width: 200px;
+}
+
+.tc-tag {
+  margin-right: 0.25rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.6rem;
+}
+
+.tc-celda--bool {
+  text-align: center;
+  width: 50px;
+}
+
+.tc-star--si {
+  color: var(--color-orange);
+  font-size: 1.1rem;
+}
+
+.tc-star--no {
+  color: var(--color-sepia);
+  opacity: 0.3;
+  font-size: 1.1rem;
+}
+
+.tc-celda--num {
+  text-align: center;
+  font-weight: 700;
+  width: 55px;
+}
+
+.tc-celda--acciones {
+  white-space: nowrap;
+  width: 160px;
+}
+
+.tc-celda--form-editar {
+  padding: 0 !important;
+}
+
+/* ── Acciones por fila ───────────────────────────── */
+
+.tc-acciones-fila {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.tc-btn-accion {
+  font-size: var(--text-micro);
+  padding: 0.3rem 0.7rem;
+  letter-spacing: 0.06em;
+  box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+.tc-btn-accion:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--color-ink);
+}
+
+/* ── Confirmación inline de borrado ─────────────── */
+
+.tc-confirmar-borrar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tc-confirmar-texto {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-danger);
+  letter-spacing: 0.08em;
+}
+
+/* ── Formulario panel (crear / editar inline) ────── */
+
+.tc-form-panel {
+  border: var(--border-heavy);
+  background: var(--color-paper);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-hard);
+}
+
+.tc-form-panel--inline {
+  border: none;
+  box-shadow: none;
+  padding: var(--space-2) var(--space-3);
+}
+
+.tc-form-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+  padding-bottom: var(--space-1);
+  border-bottom: var(--border-thick);
+}
+
+.tc-form-titulo {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+}
+
+.tc-btn-cancelar {
+  font-size: var(--text-micro);
+  padding: 0.3rem 0.7rem;
+  letter-spacing: 0.06em;
+}
+
+/* ── Campos del formulario ───────────────────────── */
+
+.tc-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.tc-form-fila {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.tc-form-fila--2 > .tc-form-campo {
+  flex: 1 1 200px;
+}
+
+.tc-form-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.tc-form-label {
   font-family: var(--font-mono);
   font-size: var(--text-micro);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-danger);
+  letter-spacing: 0.14em;
   font-weight: 700;
+  color: var(--color-sepia);
 }
 
-/* Botones pequeños para dentro de la tabla */
-.tc-btn-sm {
-  padding: 0.25rem 0.55rem !important;
-  font-size: var(--text-micro) !important;
-  box-shadow: 2px 2px 0px var(--color-ink);
+.tc-form-input {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border: var(--border-thick);
+  border-radius: 0;
+  padding: 0.55rem 0.75rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 80ms;
+  resize: vertical;
 }
 
-/* Fila en edición: fondo tenue */
-.tc-fila-activa {
-  background: rgba(255, 77, 0, 0.08) !important;
-  outline: 2px solid var(--color-orange);
-  outline-offset: -2px;
+.tc-form-input:focus {
+  outline: 3px solid var(--color-orange);
+  outline-offset: 0;
 }
 
-/* ── Responsive ────────────────────────────────────── */
+.tc-form-textarea {
+  min-height: 80px;
+}
 
-@media (max-width: 600px) {
-  .tc-form-grid {
-    grid-template-columns: 1fr;
-    padding: var(--space-2);
-  }
+/* ── Checkbox destacado ──────────────────────────── */
 
-  .tc-campo--full {
-    grid-column: 1;
-  }
+.tc-form-check {
+  display: flex;
+  align-items: center;
+}
+
+.tc-form-check-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tc-form-checkbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--color-orange);
+  cursor: pointer;
+}
+
+/* ── Submit del formulario ───────────────────────── */
+
+.tc-form-submit {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  padding-top: var(--space-1);
+  border-top: var(--border-thick);
+}
+
+/* ── Estado vacío ────────────────────────────────── */
+
+.tabla-vacia {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-sepia);
+  padding: var(--space-3);
+  border: var(--border-thick);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }

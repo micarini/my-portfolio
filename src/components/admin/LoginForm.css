@@ -1,73 +1,56 @@
-/* LoginForm.css — ficha/carnet de acceso, centrado, brutalismo suizo */
+/* LoginForm.css — formulario de autenticación admin */
+
+/* ── Contenedor centrado ──────────────────────────── */
 
 .login-wrapper {
-  min-height: calc(100vh - 120px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-4) var(--space-2);
-  /* textura diagonal sutil de fondo */
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 12px,
-    rgba(17, 17, 17, 0.04) 12px,
-    rgba(17, 17, 17, 0.04) 14px
-  );
+  min-height: calc(100vh - 160px);
+  padding: var(--space-4) var(--space-3);
 }
 
-/* Tarjeta tipo ficha de imprenta */
+/* Ficha principal con sombra dura grande */
 .login-ficha {
   width: 100%;
   max-width: 420px;
   background: var(--color-paper);
   border: var(--border-heavy);
   box-shadow: var(--shadow-hard-lg);
-  padding: 0;
-  overflow: hidden;
+  padding: var(--space-4);
 }
 
-/* Encabezado negro contrastante */
-.login-header {
-  background: var(--color-ink);
-  color: var(--color-paper);
-  padding: var(--space-3) var(--space-3) var(--space-2);
-  border-bottom: var(--border-heavy);
-  position: relative;
+/* ── Cabecera de la ficha ─────────────────────────── */
+
+.login-cabecera {
+  margin-bottom: var(--space-3);
+  border-bottom: var(--border-thick);
+  padding-bottom: var(--space-2);
 }
 
 .login-stamp {
   display: block;
   font-family: var(--font-mono);
   font-size: var(--text-micro);
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-electric);
-  margin-bottom: var(--space-1);
+  color: var(--color-orange);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
 }
 
 .login-titulo {
   font-family: var(--font-display);
-  font-size: var(--text-h1);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 6vw, 3rem);
   text-transform: uppercase;
-  color: var(--color-paper);
-  /* franja naranja decorativa */
-  -webkit-text-stroke: 2px var(--color-orange);
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  color: var(--color-ink);
 }
 
-.login-subtitulo {
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  color: var(--color-paper-dark);
-  margin-top: var(--space-1);
-  opacity: 0.7;
-}
+/* ── Formulario ───────────────────────────────────── */
 
-/* Cuerpo del formulario */
 .login-form {
-  padding: var(--space-3);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -76,90 +59,81 @@
 .login-campo {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.35rem;
 }
 
 .login-label {
   font-family: var(--font-mono);
   font-size: var(--text-micro);
-  letter-spacing: 0.14em;
-  font-weight: 700;
-  color: var(--color-sepia);
   text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-sepia);
+  font-weight: 700;
 }
 
 .login-input {
-  width: 100%;
-  padding: 0.65rem var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--text-body);
   color: var(--color-ink);
-  background: var(--color-paper);
-  border: 2px solid var(--color-ink);
+  background: var(--color-paper-dark);
+  border: var(--border-thick);
   border-radius: 0;
+  padding: 0.65rem 0.8rem;
   outline: none;
-  transition: border-color 100ms;
+  width: 100%;
+  transition: border-color 80ms;
 }
 
 .login-input:focus {
   outline: 3px solid var(--color-orange);
-  outline-offset: 0px;
-  border-color: var(--color-orange);
+  outline-offset: 0;
 }
 
-.login-input::placeholder {
-  color: rgba(17, 17, 17, 0.3);
-  font-style: italic;
-}
+/* ── Error ────────────────────────────────────────── */
 
-/* Bloque de error: rojo duro, sin adornos */
 .login-error {
   display: flex;
-  align-items: center;
-  gap: var(--space-1);
+  align-items: flex-start;
+  gap: 0.5rem;
   background: var(--color-danger);
   color: var(--color-paper);
-  border: var(--border-thick);
-  padding: 0.55rem var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--text-small);
+  padding: 0.7rem 0.9rem;
+  border: var(--border-thick);
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .login-error-icono {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.4rem;
-  height: 1.4rem;
-  background: var(--color-paper);
-  color: var(--color-danger);
-  font-weight: 900;
   flex-shrink: 0;
-  font-size: 1rem;
+  font-style: normal;
+}
+
+/* ── Botón submit ─────────────────────────────────── */
+
+.login-submit {
+  margin-top: var(--space-1);
 }
 
 .login-btn {
   width: 100%;
-  justify-content: center;
-  text-align: center;
-  padding: 0.85rem;
+  padding: 0.9rem;
   font-size: var(--text-body);
-  margin-top: var(--space-1);
+  letter-spacing: 0.12em;
 }
 
-.login-btn:disabled {
-  opacity: 0.6;
+/* Estado cargando */
+.login-btn--cargando {
+  opacity: 0.7;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: var(--shadow-hard);
 }
 
-/* Pie */
-.login-pie {
-  padding: var(--space-1) var(--space-3);
-  border-top: var(--border-thick);
-  background: var(--color-paper-dark);
-  display: flex;
-  justify-content: flex-end;
+/* ── Responsive ───────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .login-ficha {
+    padding: var(--space-3);
+  }
 }

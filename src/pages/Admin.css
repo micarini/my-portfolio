@@ -190,6 +190,41 @@
   border-top: var(--border-heavy);
 }
 
+/* ── Estados de carga / error del panel ──────────── */
+
+.admin-error-panel {
+  margin-top: var(--space-2);
+  background: var(--color-danger);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.8rem 1rem;
+  border: var(--border-thick);
+}
+
+.admin-cargando {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+
+.admin-cargando-texto {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-sepia);
+  animation: parpadeo 1s step-start infinite;
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
 /* ── Responsive ───────────────────────────────────── */
 
 @media (max-width: 768px) {

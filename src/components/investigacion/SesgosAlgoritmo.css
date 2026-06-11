@@ -1,153 +1,144 @@
-/* =====================================================
-   DEMO 01: SESGO DEL ALGORITMO — Feed simulado
-   ===================================================== */
+/* ==========================================================================
+   SESGOS ALGORITMO — Feed + slider de presión
+   ========================================================================== */
 
-.sesgo-demo {
+.sesgos-controles {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-}
-
-/* --- Controles --- */
-.sesgo-controles {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding: var(--space-3);
-  border: var(--border-heavy);
-  background: var(--color-ink);
-  color: var(--color-paper);
-}
-
-.sesgo-label {
-  font-family: var(--font-mono);
-  font-size: var(--text-micro);
-  letter-spacing: 0.15em;
-  color: var(--color-orange);
-}
-
-.sesgo-slider-row {
-  display: flex;
-  align-items: center;
   gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--border-thick);
 }
 
-.sesgo-valor-extremo {
+.sesgos-slider-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   font-family: var(--font-mono);
   font-size: var(--text-small);
-  color: var(--color-paper-dark);
-  min-width: 2ch;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
-.sesgo-presion-display {
-  display: flex;
-  align-items: baseline;
-  gap: 0.3rem;
-}
-
-.sesgo-num {
+.sesgos-slider-label strong {
   font-family: var(--font-display);
   font-size: var(--text-h2);
   color: var(--color-orange);
   line-height: 1;
 }
 
-.sesgo-unit {
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  color: var(--color-paper-dark);
-}
-
-/* --- Slider brutalista --- */
-.slider-brutal {
-  flex: 1;
+/* Slider brutalista */
+.sesgos-slider {
   -webkit-appearance: none;
   appearance: none;
+  width: 100%;
   height: 6px;
-  border-radius: 0;
   background: var(--color-paper-dark);
   border: var(--border-thick);
+  border-radius: 0;
   outline: none;
   cursor: pointer;
 }
 
-.slider-brutal::-webkit-slider-thumb {
+.sesgos-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   width: 20px;
   height: 20px;
-  border-radius: 0;
   background: var(--color-orange);
   border: 2px solid var(--color-ink);
+  border-radius: 0;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--color-ink);
-  transition: transform 120ms ease;
+  transition: background 120ms ease, transform 120ms ease;
 }
 
-.slider-brutal::-moz-range-thumb {
+.sesgos-slider::-moz-range-thumb {
   width: 20px;
   height: 20px;
-  border-radius: 0;
   background: var(--color-orange);
   border: 2px solid var(--color-ink);
+  border-radius: 0;
   cursor: pointer;
   box-shadow: 2px 2px 0 var(--color-ink);
 }
 
-.slider-brutal::-webkit-slider-thumb:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 var(--color-ink);
-}
-
-/* --- Métricas --- */
-.sesgo-metricas {
-  display: flex;
-  gap: 2px;
-}
-
-.sesgo-metrica {
-  flex: 1;
-  padding: var(--space-2);
-  border: var(--border-thick);
+.sesgos-slider::-webkit-slider-track {
   background: var(--color-paper-dark);
+  border: var(--border-thick);
+  height: 6px;
+  border-radius: 0;
+}
+
+/* Métricas debajo del slider */
+.sesgos-metricas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.sesgos-metrica {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 2px;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-thick);
+  background: var(--color-paper-dark);
 }
 
-.sesgo-metrica--danger { border-color: var(--color-danger); }
-.sesgo-metrica--ok    { border-color: var(--color-electric); }
-
-.sesgo-metrica-num {
+.sesgos-metrica__num {
   font-family: var(--font-display);
   font-size: var(--text-h2);
   line-height: 1;
+  color: var(--color-ink);
+  transition: color 300ms ease;
 }
 
-.sesgo-metrica--danger .sesgo-metrica-num { color: var(--color-danger); }
-.sesgo-metrica--ok    .sesgo-metrica-num  { color: var(--color-electric); }
+.sesgos-metrica__num--peligro {
+  color: var(--color-danger);
+}
 
-.sesgo-metrica-label {
+.sesgos-metrica__num--ok {
+  color: var(--color-electric);
+}
+
+.sesgos-metrica__label {
   font-family: var(--font-mono);
   font-size: var(--text-micro);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--color-sepia);
-  line-height: 1.3;
 }
 
-/* --- Feed simulado --- */
-.sesgo-feed {
+/* Alerta de censura */
+.sesgos-alerta {
+  padding: var(--space-1) var(--space-2);
+  border: 3px solid var(--color-danger);
+  background: var(--color-danger);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: var(--shadow-hard);
+  animation: parpadeo 800ms step-start infinite;
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Feed de rostros */
+.sesgos-feed {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-2);
-  padding: var(--space-2);
-  border: var(--border-thick);
-  background: var(--color-paper-dark);
-  min-height: 280px;
 }
 
-/* --- Tarjeta individual --- */
-.sesgo-tarjeta {
+/* Tarjeta de rostro */
+.sesgos-tarjeta {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,118 +146,98 @@
   padding: var(--space-2) var(--space-1);
   border: var(--border-thick);
   background: var(--color-paper);
-  transform-origin: center top;
-  /* transition en el componente via style inline */
+  transition: opacity 350ms ease, transform 350ms ease, box-shadow 350ms ease;
 }
 
-/* Ilustración CSS del rostro */
-.rostro-css {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
+.sesgos-tarjeta--suprimido {
+  box-shadow: none;
+}
+
+/* Cara CSS abstracta */
+.cara-css {
   position: relative;
+  width: 52px;
+  height: 60px;
 }
 
-.rostro-pelo {
-  width: 56px;
-  height: 20px;
+.cara-css__base {
+  position: absolute;
+  inset: 0;
+  border-radius: 50% 50% 48% 48% / 55% 55% 45% 45%;
 }
 
-.rostro-cara {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 8px 6px;
-  transition: width 300ms ease, height 300ms ease, background-color 300ms ease, border-radius 300ms ease;
-}
-
-.rostro-ojos {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-}
-
-.rostro-ojo {
-  background: #111;
-  border-radius: 50%;
-  transition: width 300ms ease, height 300ms ease;
-}
-
-/* Tamaño de ojos según forma */
-.rostro-ojos--grande .rostro-ojo  { width: 8px;  height: 9px;  }
-.rostro-ojos--medio .rostro-ojo   { width: 6px;  height: 7px;  }
-.rostro-ojos--almendra .rostro-ojo { width: 8px; height: 5px; border-radius: 40%; }
-
-.rostro-nariz {
-  width: 6px;
+.cara-css__ojo {
+  position: absolute;
+  top: 28%;
+  width: 8px;
   height: 8px;
-  border-radius: 0 0 3px 3px;
-  transition: background-color 300ms ease;
+  background: var(--color-ink);
+  border-radius: 50%;
 }
 
-.rostro-boca {
+.cara-css__ojo--izq { left: 22%; }
+.cara-css__ojo--der { right: 22%; }
+
+.cara-css__boca {
+  position: absolute;
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 16px;
-  height: 4px;
-  background: #111;
-  border-radius: 0 0 4px 4px;
+  height: 6px;
+  border-bottom: 2px solid var(--color-ink);
+  border-radius: 0 0 8px 8px;
 }
 
-.sesgo-tarjeta-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
+.cara-css__detalle {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 2px;
+  background: rgba(17, 17, 17, 0.3);
+  border-radius: 1px;
 }
 
-.sesgo-tarjeta-nombre {
+.sesgos-tarjeta__etiqueta {
   font-family: var(--font-mono);
   font-size: var(--text-micro);
-  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-}
-
-.sesgo-tarjeta-canon {
-  font-family: var(--font-mono);
-  font-size: var(--text-micro);
+  text-align: center;
   color: var(--color-sepia);
 }
 
-/* --- Advertencia --- */
-.sesgo-advertencia {
-  padding: var(--space-2) var(--space-3);
-  border: 3px solid var(--color-danger);
-  background: var(--color-danger);
-  color: var(--color-paper);
+.sesgos-tarjeta__estado {
   font-family: var(--font-mono);
-  font-size: var(--text-small);
-  line-height: 1.5;
-  animation: fadeIn 300ms ease;
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 1px 5px;
+  border: 1px solid currentColor;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+.estado--promovido {
+  color: var(--color-electric);
 }
 
-/* --- Responsive --- */
+.estado--suprimido {
+  color: var(--color-danger);
+}
+
 @media (max-width: 720px) {
-  .sesgo-feed {
+  .sesgos-feed {
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-1);
   }
 
-  .sesgo-metricas {
-    flex-direction: column;
-    gap: 2px;
+  .sesgos-metricas {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 480px) {
-  .sesgo-feed {
+  .sesgos-feed {
     grid-template-columns: repeat(2, 1fr);
   }
 }
