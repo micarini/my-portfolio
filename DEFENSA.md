@@ -83,10 +83,17 @@ arquitectura real.
   tiene la forma exacta de ese cuerpo de petición.
 - **"¿Por qué CSS puro y no un framework?"**
   Control total de la identidad visual (brutalismo suizo / warm retro). Todo
-  sale de variables en `:root` (`index.css`). Además el proyecto conecta
-  estado de Vue con CSS: los sliders inyectan custom properties con
-  `:style="{ '--valor': x }"` y el CSS las consume en transforms y colores
-  con `transition` — Vue maneja el dato, CSS la animación.
+  sale de variables en `:root` (`index.css`). Las animaciones de los widgets
+  son transiciones y keyframes CSS disparados por estado de Vue — Vue maneja
+  el dato, CSS la animación.
+- **"¿Qué demuestra la página de Investigación?"**
+  Es el argumento circular más fuerte del proyecto: los widgets que explican
+  Vue están construidos con Vue. El contador de la demo 01 prueba
+  empíricamente la actualización quirúrgica del DOM; los contadores de
+  recálculo de la demo 02 prueban la caché de `computed` (leer 10 veces no
+  recalcula); la demo 03 desarma `v-model` en `:value` + `@input`; la demo 04
+  monta un componente hijo real y muestra sus hooks con timestamps. El método
+  es el de Josh Comeau: primero manipulás, después leés la teoría.
 - **"¿Qué hace vue-router?"**
   SPA con rutas declarativas: `createRouter` + `createWebHistory` (URLs
   limpias con la History API), `<RouterView/>` como slot de página y
