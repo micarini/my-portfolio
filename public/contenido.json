@@ -34,12 +34,12 @@
   },
   {
     "id": 4,
-    "titulo": "La Arquitectura del Canon",
+    "titulo": "Vue por Dentro",
     "categoria": "Investigación",
     "anio": 2026,
-    "descripcion": "Ensayo interactivo sobre filtros de realidad aumentada, sesgos algorítmicos y estándares de belleza eurocéntricos en redes sociales.",
-    "tags": ["Ensayo Visual", "AR", "Crítica de Medios"],
-    "imagen": "https://picsum.photos/seed/canon/800/600",
+    "descripcion": "Ensayo interactivo sobre la anatomía de Vue.js: reactividad por Proxy, computed, v-model y ciclo de vida, explicados con widgets manipulables.",
+    "tags": ["Vue 3", "Ensayo Visual", "Reactividad"],
+    "imagen": "https://picsum.photos/seed/vuepordentro/800/600",
     "destacado": true,
     "likes": 71
   },

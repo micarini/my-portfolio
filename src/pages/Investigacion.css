@@ -1,5 +1,5 @@
 /* ==========================================================================
-   INVESTIGACION — Ensayo visual interactivo
+   INVESTIGACION — Ensayo visual interactivo: VUE POR DENTRO
    Estética: Brutalismo Suizo / Warm Retro — una columna y media editorial
    ========================================================================== */
 
@@ -101,15 +101,7 @@
 }
 
 /* --------------------------------------------------------
-   SEPARADOR
--------------------------------------------------------- */
-.inv-separador {
-  height: 0;
-  border-top: var(--border-heavy);
-}
-
-/* --------------------------------------------------------
-   INTRO
+   INTRO — fondo negro, 3 columnas
 -------------------------------------------------------- */
 .inv-intro {
   padding: var(--space-5) 0;
@@ -127,6 +119,11 @@
   font-size: 1.05rem;
   line-height: 1.65;
   color: var(--color-paper-dark);
+}
+
+.inv-intro-text em {
+  color: var(--color-electric);
+  font-style: normal;
 }
 
 /* --------------------------------------------------------
@@ -149,7 +146,7 @@
   align-items: start;
 }
 
-/* Número de sección: enorme, en el margen */
+/* Número de sección: enorme, en el margen, sticky */
 .inv-seccion-num {
   font-family: var(--font-display);
   font-size: clamp(5rem, 8vw, 7rem);
@@ -207,6 +204,19 @@
   max-width: 72ch;
 }
 
+.inv-texto-col code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-paper-dark);
+  border: 1px solid var(--color-ink);
+  padding: 0 0.3em;
+}
+
+/* En secciones alternas el fondo del code se invierte para contrastar */
+.inv-seccion--alt .inv-texto-col code {
+  background: var(--color-paper);
+}
+
 /* Dato destacado en bloque */
 .inv-dato-destacado {
   display: flex;
@@ -244,6 +254,29 @@
   font-size: var(--text-micro);
   color: rgba(243, 236, 220, 0.5);
   letter-spacing: 0.08em;
+}
+
+/* Cita con borde naranja izquierdo */
+.inv-cita {
+  border-left: 6px solid var(--color-orange);
+  padding-left: var(--space-3);
+  font-family: var(--font-grotesk);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--color-sepia);
+  font-style: italic;
+  margin: var(--space-1) 0;
+}
+
+.inv-cita cite {
+  display: block;
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
 }
 
 /* --------------------------------------------------------
@@ -355,7 +388,7 @@
   letter-spacing: 0.2em;
   color: var(--color-orange);
   margin-bottom: var(--space-3);
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   padding-bottom: var(--space-1);
 }
 

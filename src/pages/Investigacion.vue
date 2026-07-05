@@ -1,8 +1,12 @@
 <script setup>
+// VUE POR DENTRO — ensayo visual interactivo sobre el funcionamiento
+// interno de Vue.js. Detalle meta: cada widget que explica Vue está
+// construido con Vue. La página se demuestra a sí misma.
 import './Investigacion.css'
-import SesgosAlgoritmo from '../components/investigacion/SesgosAlgoritmo.vue'
-import DistorsionMorfologica from '../components/investigacion/DistorsionMorfologica.vue'
-import HomogeneizacionEstetica from '../components/investigacion/HomogeneizacionEstetica.vue'
+import DemoReactividad from '../components/investigacion/DemoReactividad.vue'
+import DemoComputed from '../components/investigacion/DemoComputed.vue'
+import DemoVModel from '../components/investigacion/DemoVModel.vue'
+import DemoCicloVida from '../components/investigacion/DemoCicloVida.vue'
 </script>
 
 <template>
@@ -12,38 +16,38 @@ import HomogeneizacionEstetica from '../components/investigacion/Homogeneizacion
   <header class="inv-header">
     <div class="container">
       <div class="inv-header-inner">
-        <!-- Meta-etiquetas -->
+        <!-- Sellos meta -->
         <div class="inv-header-meta">
           <span class="tag-brutal">INVESTIGACIÓN</span>
           <span class="tag-brutal">PROG. MULTIMEDIAL III — 2026</span>
-          <span class="tag-brutal">TECNOLOGÍA &amp; CUERPO</span>
+          <span class="tag-brutal">VUE.JS — EL FRAMEWORK</span>
         </div>
 
         <!-- Título en dos líneas con efecto outline -->
         <div class="inv-titulo-giant">
-          <span class="inv-titulo-line1">La arquitectura</span>
-          <span class="inv-titulo-line2">del canon</span>
+          <span class="inv-titulo-line1">Vue</span>
+          <span class="inv-titulo-line2">por dentro</span>
         </div>
 
-        <!-- Bajada + datos estadísticos -->
+        <!-- Bajada + datos duros -->
         <div class="inv-bajada-grid">
           <p class="inv-bajada">
-            Filtros de Realidad Aumentada, sesgos algorítmicos en redes sociales
-            y estándares de belleza eurocéntricos: cómo la tecnología codifica,
-            refuerza y distribuye a escala global un único modelo de cuerpo válido.
+            Anatomía de un framework reactivo: qué pasa exactamente entre
+            que un dato cambia y la pantalla se actualiza. Con un detalle
+            meta: los widgets que explican Vue están construidos con Vue.
           </p>
           <div class="inv-bajada-datos">
             <div class="inv-dato">
-              <strong>600M+</strong>
-              <small>usuarios expuestos diariamente<br>a filtros de AR en Instagram y TikTok</small>
+              <strong>2014</strong>
+              <small>Evan You lanza la primera<br>versión pública de Vue</small>
             </div>
             <div class="inv-dato">
-              <strong>34.7%</strong>
-              <small>aumento en solicitudes de cirugía<br>estética entre 18–24 años (2017–2022)</small>
+              <strong>~34 kB</strong>
+              <small>pesa el runtime de Vue 3<br>(minificado + gzip)</small>
             </div>
             <div class="inv-dato">
-              <strong>2x</strong>
-              <small>tasa de error de IA de reconocimiento<br>facial en pieles oscuras vs. claras</small>
+              <strong>2020</strong>
+              <small>Vue 3 introduce la<br>Composition API</small>
             </div>
           </div>
         </div>
@@ -58,37 +62,39 @@ import HomogeneizacionEstetica from '../components/investigacion/Homogeneizacion
     <div class="container">
       <div class="inv-intro-grid">
         <p class="inv-intro-text">
-          En 2016, Snapchat popularizó los primeros filtros faciales de realidad aumentada.
-          Lo que comenzó como un juego se convirtió en infraestructura: hoy, cada
-          plataforma mayor ofrece filtros que suavizan, afilan, iluminan y transforman
-          el rostro humano en tiempo real, con un sesgo sistemático hacia rasgos
-          asociados a la blancura occidental.
+          Vue.js es un framework progresivo para construir interfaces.
+          Fue creado en 2014 por Evan You, que venía de trabajar en Google
+          con Angular y quería quedarse solo con la parte que le gustaba:
+          declarar la vista en función del estado y que el framework se
+          ocupe del resto. Esa idea —describir el "qué" y delegar el
+          "cómo"— sigue siendo el corazón de Vue una década después.
         </p>
         <p class="inv-intro-text">
-          Estos filtros no son neutros. Fueron entrenados con datasets que
-          sobrerepresentan ciertas morfologías y colores de piel. Los algoritmos
-          de distribución de contenido refuerzan esa visión: el contenido que
-          encaja en el "canon" recibe más alcance, más engagement, más dinero.
-          El canon no es estético: es económico y racial.
+          Lo interesante de Vue no es lo que se ve, sino lo que no se ve:
+          un sistema de reactividad construido sobre Proxies de JavaScript
+          que intercepta cada lectura y cada escritura del estado. Cuando
+          algo lee un valor, queda suscripto. Cuando el valor cambia, Vue
+          notifica exactamente a esos suscriptores y a nadie más. Este
+          ensayo desarma ese mecanismo pieza por pieza.
         </p>
         <p class="inv-intro-text">
-          La investigadora Joy Buolamwini demostró en 2018 que los sistemas
-          de reconocimiento facial de Microsoft, IBM y Amazon fallaban en un
-          35% de los casos al clasificar género en mujeres de piel oscura,
-          versus un 1% en hombres de piel clara. La asimetría no es un bug:
-          es el reflejo de quién construyó los sistemas y con qué datos.
+          Y acá viene el giro meta: <em>cada widget interactivo de esta
+            página está construido con Vue</em>. Cuando muevas un slider y
+          veas flashear un nodo, eso es Vue actualizando el DOM de Vue para
+          explicarte cómo Vue actualiza el DOM. La página no ilustra el
+          framework: lo demuestra en vivo, sobre sí misma. Tocá primero,
+          leé después.
         </p>
       </div>
     </div>
   </section>
 
   <!-- ========================================================
-       SECCIÓN 1 — EL SESGO DEL ALGORITMO
+       SECCIÓN 01 — LA REACTIVIDAD POR PROXY
   ========================================================= -->
   <section class="inv-seccion">
     <div class="container">
       <div class="inv-seccion-grid">
-        <!-- Número en margen, sticky -->
         <div
           class="inv-seccion-num"
           aria-hidden="true"
@@ -96,63 +102,72 @@ import HomogeneizacionEstetica from '../components/investigacion/Homogeneizacion
           01
         </div>
 
-        <!-- Contenido -->
         <div class="inv-seccion-contenido">
           <div class="inv-seccion-header">
-            <span class="inv-seccion-subtitulo">Algoritmos de distribución</span>
+            <span class="inv-seccion-subtitulo">Cómo sabe Vue que algo cambió</span>
             <h2 class="inv-seccion-titulo">
-              El sesgo<br>del algoritmo
+              La reactividad<br>por Proxy
             </h2>
           </div>
 
-          <!-- Texto editorial -->
+          <!-- Intro breve ANTES del widget -->
           <div class="inv-texto-col">
             <p>
-              Los algoritmos de feed no evalúan belleza de forma explícita,
-              pero los proxies que utilizan —engagement, tiempo de visualización,
-              tasa de guardado— están correlacionados con la exposición previa
-              a ciertos estándares estéticos. Un rostro que encaja en el "tipo"
-              dominante genera más interacción simplemente porque el usuario
-              fue expuesto a ese tipo con mayor frecuencia.
-            </p>
-            <p>
-              El resultado es un ciclo de retroalimentación: el contenido que
-              se parece al canon recibe más distribución, lo que normaliza el
-              canon, lo que hace que el contenido similar genere más engagement,
-              lo que le da más distribución. La diversidad no es suprimida
-              activamente: es ignorada por omisión, que es una forma más
-              sofisticada —y más difícil de refutar— de censura.
+              Antes de la teoría, el experimento. Escribí algo en el input
+              de abajo y mirá el diagrama: el estado central pulsa, las ondas
+              viajan a las tres cajas suscriptoras, y la terminal registra
+              cada operación. Prestale atención a los dos contadores del pie.
             </p>
           </div>
 
-          <!-- Dato destacado -->
-          <div class="inv-dato-destacado">
-            <div class="inv-dato-num">
-              68%
-            </div>
-            <div class="inv-dato-desc">
-              <span>de los filtros de belleza más usados en Instagram aclaran el tono de piel como comportamiento por defecto.</span>
-              <small>Fuente: Digital Witness Lab, 2021</small>
-            </div>
-          </div>
-
-          <!-- DEMO INTERACTIVA 1 -->
+          <!-- DEMO 01 -->
           <div class="inv-demo-bloque">
             <div class="inv-demo-etiqueta">
               <span>DEMO INTERACTIVA — 01</span>
-              <span>EL SESGO DEL ALGORITMO</span>
+              <span>LA REACTIVIDAD POR PROXY</span>
             </div>
             <div>
-              <SesgosAlgoritmo />
+              <DemoReactividad />
             </div>
           </div>
+
+          <!-- Explicación DESPUÉS del widget -->
+          <div class="inv-texto-col">
+            <p>
+              Lo que acabás de tocar es el sistema de reactividad de Vue.
+              Cuando declarás <code>const nombre = ref('Vue')</code>, Vue no
+              crea una variable común: envuelve el valor en un
+              <code>Proxy</code> de JavaScript que intercepta dos operaciones.
+              En el <strong>GET</strong> (alguien lee el valor), Vue anota
+              quién está leyendo: esa interpolación del template, ese computed,
+              ese watcher quedan registrados como dependencias. En el
+              <strong>SET</strong> (alguien escribe), Vue recorre la lista de
+              suscriptores registrados y los notifica, uno por uno.
+            </p>
+            <p>
+              Por eso los dos contadores del widget son siempre iguales:
+              cada tecla produjo exactamente una actualización del DOM,
+              ni una más. Vue no re-renderiza la página ni el componente
+              entero: actualiza quirúrgicamente los tres nodos de texto
+              que dependen de <code>nombre</code>. La suscripción se armó
+              sola, en el primer render, cuando cada caja leyó el valor
+              por primera vez.
+            </p>
+          </div>
+
+          <blockquote class="inv-cita">
+            "En Vue 3, la reactividad se implementa interceptando las
+            operaciones de lectura y escritura de propiedades mediante
+            Proxies de ES2015."
+            <cite>— Vue.js, "Reactivity in Depth" (vuejs.org/guide)</cite>
+          </blockquote>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ========================================================
-       SECCIÓN 2 — LA DISTORSIÓN MORFOLÓGICA
+       SECCIÓN 02 — COMPUTED Y EL GRAFO DE DEPENDENCIAS
   ========================================================= -->
   <section class="inv-seccion inv-seccion--alt">
     <div class="container">
@@ -166,50 +181,65 @@ import HomogeneizacionEstetica from '../components/investigacion/Homogeneizacion
 
         <div class="inv-seccion-contenido">
           <div class="inv-seccion-header">
-            <span class="inv-seccion-subtitulo">Filtros de AR y cirugía algorítmica</span>
+            <span class="inv-seccion-subtitulo">Valores derivados, memorización y caché</span>
             <h2 class="inv-seccion-titulo">
-              La distorsión<br>morfológica
+              Computed y el grafo<br>de dependencias
             </h2>
           </div>
 
           <div class="inv-texto-col">
             <p>
-              Los filtros de realidad aumentada operan en tiempo real sobre el
-              mapa de profundidad del rostro: detectan landmarks (pómulos,
-              mandíbula, nariz, comisuras labiales) y los desplazan según
-              parámetros predefinidos. Esos parámetros no son neutrales:
-              fueron elegidos por equipos de diseño que optaron por afinar
-              narices, agrandar ojos y aclarar pieles como transformaciones
-              "mejorantes".
+              Mové los sliders y el toggle de envío: fijate qué nodos del
+              grafo flashean con cada cambio y cuáles quedan quietos.
+              Cuando termines, apretá el botón que lee el total diez veces
+              seguidas y mirá los contadores de recálculo.
+            </p>
+          </div>
+
+          <!-- DEMO 02 -->
+          <div class="inv-demo-bloque">
+            <div class="inv-demo-etiqueta">
+              <span>DEMO INTERACTIVA — 02</span>
+              <span>COMPUTED Y GRAFO DE DEPENDENCIAS</span>
+            </div>
+            <div>
+              <DemoComputed />
+            </div>
+          </div>
+
+          <div class="inv-texto-col">
+            <p>
+              Un <code>computed</code> es una función que Vue memoriza.
+              La primera vez que algo accede a su valor, Vue la ejecuta y
+              registra qué refs leyó durante esa ejecución: ese conjunto de
+              lecturas <em>es</em> el grafo de dependencias, construido
+              automáticamente, sin anotaciones. El resultado queda guardado
+              en caché junto con la lista de dependencias.
             </p>
             <p>
-              El término "Snapchat Dysmorphia" fue acuñado en 2018 por
-              el Dr. Tijion Esho para describir el fenómeno de pacientes
-              que llegan a cirugías estéticas pidiendo parecerse no a
-              una persona real, sino a su propia versión filtrada.
-              La distorsión ya no es percibida como artefacto tecnológico,
-              sino como referencia de lo que el cuerpo "debería" ser.
+              Las siguientes lecturas no ejecutan nada: si ninguna dependencia
+              cambió desde el último cálculo, Vue devuelve el valor cacheado.
+              Por eso el botón de las diez lecturas no movió los contadores:
+              leer no invalida la caché, solo escribir una dependencia lo hace.
+              Y la invalidación es selectiva — cambiar <code>envioGratis</code>
+              recalcula <code>total</code> pero no <code>subtotal</code>,
+              porque <code>subtotal</code> no depende del envío. Esa es la
+              diferencia entre un computed y un método: el método se ejecuta
+              en cada render; el computed, solo cuando su mundo cambió.
             </p>
           </div>
 
           <div class="inv-dato-destacado">
             <div class="inv-dato-num">
-              +55%
+              0
             </div>
             <div class="inv-dato-desc">
-              <span>de aumento en solicitudes de rinoplastia reportadas por cirujanos plásticos en los EE.UU. post-masificación de filtros AR.</span>
-              <small>American Academy of Facial Plastic Surgery, 2020</small>
-            </div>
-          </div>
-
-          <!-- DEMO INTERACTIVA 2 -->
-          <div class="inv-demo-bloque">
-            <div class="inv-demo-etiqueta">
-              <span>DEMO INTERACTIVA — 02</span>
-              <span>LA DISTORSIÓN MORFOLÓGICA</span>
-            </div>
-            <div>
-              <DistorsionMorfologica />
+              <span>
+                recálculos ejecuta un computed cuando se lo lee repetidamente
+                sin que cambien sus dependencias. La memorización no es una
+                optimización opcional: es el contrato de la API.
+              </span>
+              <small>Vue.js — "Computed Properties" (vuejs.org/guide)</small>
             </div>
           </div>
         </div>
@@ -218,7 +248,7 @@ import HomogeneizacionEstetica from '../components/investigacion/Homogeneizacion
   </section>
 
   <!-- ========================================================
-       SECCIÓN 3 — INSTAGRAM FACE
+       SECCIÓN 03 — V-MODEL, DESARMADO
   ========================================================= -->
   <section class="inv-seccion">
     <div class="container">
@@ -232,49 +262,51 @@ import HomogeneizacionEstetica from '../components/investigacion/Homogeneizacion
 
         <div class="inv-seccion-contenido">
           <div class="inv-seccion-header">
-            <span class="inv-seccion-subtitulo">Convergencia estética global</span>
+            <span class="inv-seccion-subtitulo">Azúcar sintáctico sobre flujo unidireccional</span>
             <h2 class="inv-seccion-titulo">
-              Instagram<br>Face
+              v-model,<br>desarmado
             </h2>
           </div>
 
           <div class="inv-texto-col">
             <p>
-              En diciembre de 2019, Jia Tolentino publicó en The New Yorker
-              "The Age of Instagram Face", un ensayo que describía la emergencia
-              de un tipo facial único, globalizado y racialmente ambiguo —pero
-              codificado en la herencia eurocéntrica— que los filtros, los
-              algoritmos y la cirugía estética convergían en producir.
-            </p>
-            <p>
-              La "ambigüedad racial" de ese rostro es, en realidad, una
-              forma de borrado: suaviza los rasgos asociados a etnias no
-              blancas sin hacerlos desaparecer del todo, produciendo un
-              híbrido que es palatable para el algoritmo y para el mercado
-              global. La diversidad superficial coexiste con una homogeneidad
-              estructural profunda.
+              Dos inputs, un solo estado. Escribí en cualquiera de los dos
+              y mirá las flechas del centro: se iluminan según la dirección
+              del flujo en cada tecla. Después usá el toggle "VER EL AZÚCAR"
+              para comparar las dos sintaxis.
             </p>
           </div>
 
-          <div class="inv-dato-destacado">
-            <div class="inv-dato-num">
-              1 tipo
-            </div>
-            <div class="inv-dato-desc">
-              <span>Las 100 cuentas de belleza más seguidas en Instagram presentan rasgos convergentes en más de un 80% de su contenido de alto alcance.</span>
-              <small>Análisis propio sobre datos públicos, 2024</small>
-            </div>
-          </div>
-
-          <!-- DEMO INTERACTIVA 3 -->
+          <!-- DEMO 03 -->
           <div class="inv-demo-bloque">
             <div class="inv-demo-etiqueta">
               <span>DEMO INTERACTIVA — 03</span>
-              <span>INSTAGRAM FACE</span>
+              <span>V-MODEL, DESARMADO</span>
             </div>
             <div>
-              <HomogeneizacionEstetica />
+              <DemoVModel />
             </div>
+          </div>
+
+          <div class="inv-texto-col">
+            <p>
+              <code>v-model</code> es azúcar sintáctico: una abreviatura que
+              el compilador de Vue expande antes de generar el render. Escribir
+              <code>v-model="texto"</code> equivale exactamente a escribir
+              <code>:value="texto"</code> (el estado fluye hacia el input) más
+              <code>@input="texto = $event.target.value"</code> (el evento
+              actualiza el estado). Los dos inputs del widget usan una sintaxis
+              cada uno, y se comportan idéntico — porque <em>son</em> idénticos.
+            </p>
+            <p>
+              La lección de fondo: en Vue no existe el binding bidireccional
+              como mecanismo. Existe un flujo unidireccional (estado → vista)
+              más un evento que viaja de vuelta (vista → estado). La
+              "bidireccionalidad" es una comodidad de escritura, no una
+              ruptura del modelo. React decidió no ofrecer ese azúcar y te
+              hace escribir el <code>onChange</code> a mano; Vue decidió
+              ofrecerlo. Debajo, los dos hacen lo mismo.
+            </p>
           </div>
         </div>
       </div>
@@ -282,45 +314,126 @@ import HomogeneizacionEstetica from '../components/investigacion/Homogeneizacion
   </section>
 
   <!-- ========================================================
-       CONCLUSIÓN
+       SECCIÓN 04 — EL CICLO DE VIDA
+  ========================================================= -->
+  <section class="inv-seccion inv-seccion--alt">
+    <div class="container">
+      <div class="inv-seccion-grid">
+        <div
+          class="inv-seccion-num"
+          aria-hidden="true"
+        >
+          04
+        </div>
+
+        <div class="inv-seccion-contenido">
+          <div class="inv-seccion-header">
+            <span class="inv-seccion-subtitulo">Hooks, garantías y el momento del fetch</span>
+            <h2 class="inv-seccion-titulo">
+              El ciclo<br>de vida
+            </h2>
+          </div>
+
+          <div class="inv-texto-col">
+            <p>
+              Este widget monta un componente hijo de verdad — no una
+              simulación. Apretá MONTAR COMPONENTE y mirá la línea de tiempo:
+              cada hook se enciende en orden, con su timestamp real, reportado
+              por el propio hijo. Después desmontalo y mirá los dos últimos.
+            </p>
+          </div>
+
+          <!-- DEMO 04 -->
+          <div class="inv-demo-bloque">
+            <div class="inv-demo-etiqueta">
+              <span>DEMO INTERACTIVA — 04</span>
+              <span>EL CICLO DE VIDA</span>
+            </div>
+            <div>
+              <DemoCicloVida />
+            </div>
+          </div>
+
+          <div class="inv-texto-col">
+            <p>
+              Todo componente de Vue atraviesa la misma secuencia: el
+              <code>setup</code> corre primero (los refs nacen, el DOM todavía
+              no existe), <code>onBeforeMount</code> avisa que el montaje es
+              inminente, y <code>onMounted</code> garantiza que el DOM real ya
+              está en la página. Al final del camino, <code>onBeforeUnmount</code>
+              y <code>onUnmounted</code> marcan la despedida: el momento del
+              cleanup de timers, listeners y suscripciones.
+            </p>
+            <p>
+              ¿Por qué el fetch va en <code>onMounted</code>? Porque es la
+              primera garantía de que el componente puede mostrar lo que está
+              pasando: el spinner de carga necesita un DOM donde renderizarse.
+              El hijo de esta demo simula su fetch con un
+              <code>setTimeout</code>, pero el patrón es exactamente el que
+              usa la página Home de este mismo portfolio: su
+              <code>onMounted</code> hace un <code>fetch('/contenido.json')</code>
+              real, con estado de carga y de error. Misma coreografía:
+              primero montarse, después pedir datos.
+            </p>
+            <p>
+              El detalle técnico elegante: el hijo le reporta cada hook al
+              padre con <code>emit('hook')</code>, y el padre pinta la línea
+              de tiempo. La comunicación hijo→padre por eventos es, otra vez,
+              el mismo flujo unidireccional de la sección 03 — props bajan,
+              eventos suben.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       CONCLUSIÓN CRÍTICA
   ========================================================= -->
   <section class="inv-conclusion">
     <div class="container">
       <div class="inv-conclusion-grid">
-        <!-- Header sticky -->
         <div class="inv-conclusion-header">
           <span class="inv-conclusion-label">Conclusión crítica</span>
           <h2 class="inv-conclusion-titulo">
-            Sin<br>filtros
+            El modelo<br>mental
           </h2>
         </div>
 
-        <!-- Cuerpo de la conclusión -->
         <div class="inv-conclusion-texto">
           <p>
-            Los filtros de realidad aumentada, los algoritmos de distribución
-            y la industria de la cirugía estética no operan como sistemas
-            independientes: forman un ecosistema retroalimentado que produce,
-            reproduce y monetiza un único estándar de cuerpo. La tecnología
-            no inventó el racismo estético, pero le dio infraestructura global,
-            velocidad de escala y una apariencia de neutralidad que lo hace
-            más difícil de nombrar y resistir.
+            Estudiar Vue por dentro cambia la forma de escribir Vue. La
+            reactividad deja de ser magia y se vuelve un sistema de
+            suscripciones explícito: los componentes no "adivinan" que el
+            estado cambió — se registraron como observadores en el momento
+            exacto en que leyeron ese valor, y el Proxy los notifica cuando
+            alguien escribe. GET registra, SET notifica. Con ese modelo
+            mental, cada comportamiento del framework (por qué un computed
+            no se recalcula, por qué un watcher no dispara, por qué el DOM
+            se actualiza solo donde hace falta) deja de ser un misterio y
+            pasa a ser una consecuencia lógica.
           </p>
           <p>
-            La "objetividad" del algoritmo es una ficción útil. Ningún sistema
-            de recomendación es neutro: refleja los valores, los datos y los
-            incentivos económicos de quienes lo construyeron. Cuando esos
-            sistemas son entrenados mayoritariamente sobre imágenes de personas
-            blancas, producen jerarquías visuales. Cuando esas jerarquías son
-            distribuidas a 600 millones de personas por día, dejan de ser
-            preferencias estéticas y se convierten en infraestructura normativa.
+            La comparación honesta con React cabe en una línea: React
+            re-renderiza el componente entero y reconcilia después; Vue
+            rastrea dependencias finas y actualiza solo a los suscriptores.
+            Ninguno es objetivamente mejor — son dos respuestas defendibles
+            a la misma pregunta, con trade-offs opuestos: React compra
+            simplicidad conceptual al precio de renders redundantes; Vue
+            compra precisión quirúrgica al precio de un sistema de
+            interceptación más complejo bajo el capó.
           </p>
           <p>
-            Resistir esta arquitectura requiere más que cambiar los parámetros
-            de los filtros. Requiere cuestionar quién diseña los sistemas, con
-            qué datos, para qué mercado y con qué visión de lo humano. Requiere,
-            también, recuperar la capacidad de ver el propio cuerpo sin la
-            mediación de un sistema que tiene intereses económicos en modificarlo.
+            Lo que queda después de esta investigación es que un framework
+            no es magia: es un conjunto de decisiones de diseño con
+            consecuencias observables. El Proxy es una decisión. La caché
+            de los computed es una decisión. Que el fetch vaya en
+            <code>onMounted</code> es una decisión sobre cuándo el framework
+            te cede el control. Y la mejor prueba de que estas ideas se
+            entendieron es esta misma página: cada widget que explicó Vue
+            fue construido con refs, computeds, watchers y hooks de Vue.
+            El ensayo es su propia demostración.
           </p>
         </div>
       </div>
@@ -338,49 +451,37 @@ import HomogeneizacionEstetica from '../components/investigacion/Homogeneizacion
       <ol class="inv-biblio-lista">
         <li>
           <span>
-            Tolentino, J. (2019). <em>The Age of Instagram Face.</em>
-            The New Yorker. [https://www.newyorker.com/culture/decade-in-review/the-age-of-instagram-face]
+            Vue.js Core Team. <em>Reactivity in Depth.</em>
+            Documentación oficial de Vue 3.
+            [https://vuejs.org/guide/extras/reactivity-in-depth]
           </span>
         </li>
         <li>
           <span>
-            Buolamwini, J. &amp; Gebru, T. (2018). <em>Gender Shades: Intersectional Accuracy
-              Disparities in Commercial Gender Classification.</em>
-            Proceedings of Machine Learning Research, 81, 1–15.
+            Vue.js Core Team. <em>Computed Properties.</em>
+            Documentación oficial de Vue 3.
+            [https://vuejs.org/guide/essentials/computed]
           </span>
         </li>
         <li>
           <span>
-            American Academy of Facial Plastic and Reconstructive Surgery. (2020).
-            <em>AAFPRS Annual Survey: Social Media Influence on Aesthetic Surgery.</em>
-            AAFPRS Annual Report.
+            Vue.js Core Team. <em>Lifecycle Hooks.</em>
+            Documentación oficial de Vue 3.
+            [https://vuejs.org/guide/essentials/lifecycle]
           </span>
         </li>
         <li>
           <span>
-            Esho, T. (2018). <em>Snapchat Dysmorphia: The Impact of Augmented Reality
-              Filters on Body Image and Cosmetic Procedures.</em>
-            Journal of Plastic Surgery, JAMA Facial Plastic Surgery.
+            You, E. <em>Blog de Evan You.</em> Notas de diseño del framework
+            y anuncios de releases de Vue. [https://blog.evanyou.me]
           </span>
         </li>
         <li>
           <span>
-            Digital Witness Lab / University of Massachusetts Amherst. (2021).
-            <em>Auditing Beauty Filters: Racial Bias in Augmented Reality Beauty Tools.</em>
-            Digital Witness Lab Technical Report.
-          </span>
-        </li>
-        <li>
-          <span>
-            Cheung, L. &amp; Williams, R. (2022). <em>Algorithmic Colorism: How Recommendation
-              Systems Encode Racial Beauty Standards.</em>
-            ACM Conference on Fairness, Accountability, and Transparency (FAccT).
-          </span>
-        </li>
-        <li>
-          <span>
-            hooks, b. (1992). <em>Black Looks: Race and Representation.</em>
-            South End Press. [Cap. 2: Eating the Other: Desire and Resistance]
+            Comeau, J. W. <em>joshwcomeau.com.</em> Referencia metodológica
+            de este ensayo: explicaciones interactivas donde el lector
+            manipula widgets y entiende el concepto de forma empírica antes
+            de leer la teoría. Inspiración pedagógica, no fuente sobre Vue.
           </span>
         </li>
       </ol>

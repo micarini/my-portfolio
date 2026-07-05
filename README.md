@@ -29,7 +29,7 @@ del segundo cuatrimestre, por eso todo el proyecto está implementado con él.
 │   ├── pages/                # una vista por ruta (.vue + .css)
 │   │   ├── Home.vue          # galería asincrónica (onMounted + fetch)
 │   │   ├── Admin.vue         # login simulado + CRUD con feedback inmediato
-│   │   └── Investigacion.vue # ensayo interactivo "La arquitectura del canon"
+│   │   └── Investigacion.vue # "Vue por dentro": ensayo interactivo sobre Vue
 │   └── models/
 │       └── AdminRequest.js   # clase POO: peticiones estructuradas + log
 ├── vercel.json               # rewrites SPA para vue-router en Vercel
