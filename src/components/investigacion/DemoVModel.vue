@@ -5,7 +5,6 @@
 // la dirección del flujo: input → estado en cada tecla, estado → DOM
 // cuando Vue termina de actualizar (nextTick).
 import { ref, watch, nextTick } from 'vue'
-import './DemoVModel.css'
 
 const texto = ref('Hola')
 const mostrarAzucar = ref(true)
@@ -128,3 +127,219 @@ watch(texto, () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* ==========================================================================
+   DemoVModel — Demo 03: v-model, desarmado
+   Dos inputs sobre el mismo ref + flechas de flujo + snippet con toggle.
+   ========================================================================== */
+
+.demo-vm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  overflow: hidden;
+}
+
+.demo-vm__hint {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #8a8f9c;
+}
+
+/* --------------------------------------------------------
+   Los dos inputs sincronizados con el estado central
+-------------------------------------------------------- */
+.demo-vm__inputs {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.demo-vm__input-bloque {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.demo-vm__input-rotulo {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-paper-dark);
+}
+
+.demo-vm__input {
+  font-family: var(--font-mono);
+  font-size: var(--text-body);
+  color: var(--color-paper);
+  background: var(--color-ink);
+  border: 1.5px solid var(--color-paper);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  width: 100%;
+}
+
+.demo-vm__input:focus {
+  border-color: var(--color-orange);
+  box-shadow: 0 0 0 3px rgba(134, 128, 255, 0.2);
+}
+
+/* Columna central: flechas que se iluminan según la dirección del flujo */
+.demo-vm__flujo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.demo-vm__flecha {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: 700;
+  padding: 2px 8px;
+  border: 1.5px solid var(--color-paper);
+  border-radius: 4px;
+  background: var(--color-sepia);
+  color: var(--color-paper);
+  transition:
+    background 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.demo-vm__flecha--activa {
+  background: var(--color-orange);
+  color: var(--color-ink);
+  border-color: var(--color-orange);
+}
+
+/* Estado central visible entre las flechas */
+.demo-vm__estado {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-paper-dark);
+}
+
+.demo-vm__estado-valor {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--color-paper);
+  display: block;
+  margin-top: 2px;
+  word-break: break-all;
+  max-width: 16ch;
+}
+
+/* --------------------------------------------------------
+   Zona del snippet de código con toggle
+-------------------------------------------------------- */
+.demo-vm__codigo-zona {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.demo-vm__toggle-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.demo-vm__toggle-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.demo-vm__toggle {
+  width: 2.4rem;
+  height: 1.3rem;
+  background: var(--color-sepia);
+  border: 1.5px solid var(--color-paper);
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.demo-vm__toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(1.3rem - 8px);
+  height: calc(1.3rem - 8px);
+  background: var(--color-paper);
+  transition: transform 200ms ease;
+}
+
+.demo-vm__toggle:checked {
+  background: var(--color-electric);
+}
+
+.demo-vm__toggle:checked::after {
+  transform: translateX(1.1rem);
+}
+
+/* Bloque <pre> estilizado, highlighting con spans manuales */
+.demo-vm__pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  line-height: 1.7;
+  background: var(--color-sepia);
+  color: var(--color-paper);
+  border: 1px solid rgba(217, 222, 236, 0.1);
+  border-radius: 8px;
+  padding: var(--space-2) var(--space-3);
+  overflow-x: auto;
+  white-space: pre;
+  max-width: 100%;
+}
+
+/* Paleta del syntax highlighting manual */
+.syn-tag {
+  color: #88c0d0;
+}
+
+.syn-attr {
+  color: var(--color-primary);
+}
+
+.syn-val {
+  color: #ebcb8b;
+}
+
+.syn-cmnt {
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+}
+
+/* --------------------------------------------------------
+   Responsive
+-------------------------------------------------------- */
+@media (max-width: 720px) {
+  .demo-vm__inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-vm__flujo {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+</style>

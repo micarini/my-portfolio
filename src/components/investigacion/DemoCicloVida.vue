@@ -4,7 +4,6 @@
 // El hijo reporta cada hook vía emit('hook', { nombre, ts }) y acá se
 // pintan en una línea de tiempo vertical con timestamps relativos al setup.
 import { ref } from 'vue'
-import './DemoCicloVida.css'
 import HijoCicloVida from './HijoCicloVida.vue'
 
 const montado = ref(false)
@@ -113,3 +112,137 @@ function hookTs(nombre) {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* ==========================================================================
+   DemoCicloVida — Demo 04: El ciclo de vida
+   Botón montar/desmontar + línea de tiempo vertical de hooks con timestamps.
+   ========================================================================== */
+
+.demo-cl {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.demo-cl__hint {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #8a8f9c;
+}
+
+.demo-cl__controles {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* Área donde vive (o no) el componente hijo */
+.demo-cl__area {
+  min-height: 120px;
+  border: var(--border-thick);
+  background: var(--color-sepia);
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-cl__vacio {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-paper-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* --------------------------------------------------------
+   Línea de tiempo vertical de hooks
+-------------------------------------------------------- */
+.demo-cl__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.demo-cl__hook {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--space-2);
+  align-items: stretch;
+  position: relative;
+}
+
+.demo-cl__hook-linea {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+/* Conector vertical entre círculos */
+.demo-cl__hook:not(:last-child) .demo-cl__hook-linea::after {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 7px;
+  width: 2px;
+  height: calc(100% - 24px);
+  background: var(--color-paper);
+  opacity: 0.2;
+}
+
+/* Círculo del hook: es un punto de una línea de tiempo, círculo por definición */
+.demo-cl__hook-circulo {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-paper);
+  border-radius: 50%;
+  background: var(--color-ink);
+  flex-shrink: 0;
+  transition:
+    background 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.demo-cl__hook-circulo--activo {
+  background: var(--color-orange);
+  border-color: var(--color-paper);
+  box-shadow: 0 0 0 3px rgba(134, 128, 255, 0.3);
+}
+
+.demo-cl__hook-body {
+  padding-bottom: var(--space-2);
+}
+
+.demo-cl__hook-nombre {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: 700;
+  color: var(--color-paper);
+}
+
+.demo-cl__hook-nombre--activo {
+  color: var(--color-orange);
+}
+
+.demo-cl__hook-ts {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--color-electric);
+  background: var(--color-paper);
+  padding: 1px 6px;
+  margin-left: 6px;
+}
+
+.demo-cl__hook-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-paper-dark);
+  line-height: 1.5;
+  margin-top: 2px;
+  max-width: 60ch;
+}
+</style>

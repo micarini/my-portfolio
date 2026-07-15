@@ -1,6 +1,4 @@
 <script setup>
-import './ProjectCard.css';
-
 defineProps({
   proyecto: {
     type: Object,
@@ -14,7 +12,6 @@ defineProps({
     class="project-card"
     :class="{ 'project-card--destacado': proyecto.destacado }"
   >
-    <!-- Imagen -->
     <div class="project-card__imagen-wrap">
       <img
         :src="proyecto.imagen"
@@ -22,39 +19,71 @@ defineProps({
         class="project-card__imagen"
         loading="lazy"
       >
-      <span class="project-card__anio">{{ proyecto.anio }}</span>
     </div>
-
-    <!-- Cuerpo -->
-    <div class="project-card__cuerpo">
-      <span class="project-card__categoria tag-brutal">{{ proyecto.categoria }}</span>
-
-      <h2 class="project-card__titulo">
-        {{ proyecto.titulo }}
-      </h2>
-
-      <p class="project-card__descripcion">
-        {{ proyecto.descripcion }}
-      </p>
-
-      <ul class="project-card__tags">
-        <li
-          v-for="tag in proyecto.tags"
-          :key="tag"
-          class="project-card__tag-item tag-brutal"
-        >
-          {{ tag }}
-        </li>
-      </ul>
-
-      <!-- Footer -->
-      <div class="project-card__footer">
-        <span class="project-card__likes">♥ {{ proyecto.likes }}</span>
-        <span
-          v-if="proyecto.destacado"
-          class="project-card__badge"
-        >Destacado</span>
-      </div>
+    <div class="project-card__info">
+      <h2 class="project-card__titulo">{{ proyecto.titulo }}</h2>
+      <span class="project-card__categoria">{{ proyecto.categoria }}</span>
     </div>
   </article>
 </template>
+
+<style scoped>
+.project-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card__imagen-wrap {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.project-card__imagen {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.9);
+  transition:
+    transform 500ms var(--ease-out-expo),
+    filter 400ms ease;
+}
+
+.project-card--destacado .project-card__imagen {
+  aspect-ratio: 16 / 7;
+}
+
+.project-card:hover .project-card__imagen {
+  transform: scale(1.03);
+  filter: saturate(1.05) brightness(0.95);
+}
+
+.project-card__info {
+  padding: var(--space-1) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.project-card__titulo {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: var(--text-body);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--color-paper);
+  transition: color 240ms ease;
+}
+
+.project-card:hover .project-card__titulo {
+  color: var(--color-primary);
+}
+
+.project-card__categoria {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-paper-dark);
+}
+</style>

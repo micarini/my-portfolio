@@ -1,68 +1,50 @@
 [
   {
-    "id": 1,
-    "titulo": "KitchenLogs",
-    "categoria": "Desarrollo Web",
+    "id": 5,
+    "titulo": "Aera",
+    "categoria": "Web App",
     "anio": 2026,
-    "descripcion": "Bitácora de cocina full-stack: registro de recetas, logs de prueba y error, y puntuación de resultados. Construida con Next.js y MongoDB.",
-    "tags": ["Next.js", "MongoDB", "CRUD"],
-    "imagen": "https://picsum.photos/seed/kitchenlogs/800/600",
-    "destacado": true,
-    "likes": 34
+    "imagen": "/proyectos/aera.png",
+    "destacado": false
   },
   {
     "id": 2,
-    "titulo": "Recetario Interactivo",
-    "categoria": "Desarrollo Web",
+    "titulo": "Soli",
+    "categoria": "Web App",
     "anio": 2026,
-    "descripcion": "Primer trabajo práctico de la materia: catálogo de recetas con filtrado dinámico y renderizado condicional en React.",
-    "tags": ["React", "JavaScript", "Fetch API"],
-    "imagen": "https://picsum.photos/seed/recetas/800/600",
-    "destacado": false,
-    "likes": 18
+    "imagen": "/proyectos/soli.png",
+    "destacado": false
+  },
+  {
+    "id": 1,
+    "titulo": "Bauhaus P5",
+    "categoria": "Creative Coding",
+    "anio": 2025,
+    "imagen": "/proyectos/bauhaus-p5.png",
+    "destacado": true
   },
   {
     "id": 3,
     "titulo": "TMDB Explorer",
-    "categoria": "Consumo de APIs",
+    "categoria": "Web App",
     "anio": 2026,
-    "descripcion": "Explorador de cine conectado a la API de The Movie Database: búsqueda asincrónica, paginación y fichas de películas.",
-    "tags": ["API REST", "Async/Await", "React Router"],
-    "imagen": "https://picsum.photos/seed/tmdb/800/600",
-    "destacado": true,
-    "likes": 52
-  },
-  {
-    "id": 4,
-    "titulo": "Vue por Dentro",
-    "categoria": "Investigación",
-    "anio": 2026,
-    "descripcion": "Ensayo interactivo sobre la anatomía de Vue.js: reactividad por Proxy, computed, v-model y ciclo de vida, explicados con widgets manipulables.",
-    "tags": ["Vue 3", "Ensayo Visual", "Reactividad"],
-    "imagen": "https://picsum.photos/seed/vuepordentro/800/600",
-    "destacado": true,
-    "likes": 71
-  },
-  {
-    "id": 5,
-    "titulo": "Sistema Editorial Brutalista",
-    "categoria": "Diseño UI",
-    "anio": 2026,
-    "descripcion": "Sistema de diseño propio inspirado en el brutalismo suizo y la gráfica retro: tipografía agresiva, bordes duros y paleta cálida.",
-    "tags": ["Design System", "CSS Puro", "Tipografía"],
-    "imagen": "https://picsum.photos/seed/editorial/800/600",
-    "destacado": false,
-    "likes": 27
+    "imagen": "/proyectos/tmdb-explorer.png",
+    "destacado": false
   },
   {
     "id": 6,
-    "titulo": "Experimentos Tipográficos",
-    "categoria": "Motion",
-    "anio": 2025,
-    "descripcion": "Serie de piezas animadas con CSS puro: titulares cinéticos, marquesinas y composiciones de grilla rotas a propósito.",
-    "tags": ["CSS Animations", "Kinetic Type"],
-    "imagen": "https://picsum.photos/seed/tipografia/800/600",
-    "destacado": false,
-    "likes": 23
+    "titulo": "CodiFun",
+    "categoria": "Full Branding",
+    "anio": 2026,
+    "imagen": "/proyectos/codifun.png",
+    "destacado": false
+  },
+  {
+    "id": 4,
+    "titulo": "KitchenLogs",
+    "categoria": "Web App",
+    "anio": 2026,
+    "imagen": "/proyectos/kitchenlogs.png",
+    "destacado": true
   }
 ]

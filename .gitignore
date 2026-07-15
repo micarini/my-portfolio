@@ -23,9 +23,12 @@ dist-ssr
 *.sln
 *.sw?
 
-# Artefactos locales de tooling (plugins de Claude)
+# Tooling local — no se pushea
 .claude/
 .impeccable/
 skills-lock.json
 DESIGN.md
 PRODUCT.md
+
+# Guía de estudio personal (no va al repo)
+DEFENSA.md

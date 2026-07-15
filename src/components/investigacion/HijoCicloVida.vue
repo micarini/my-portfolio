@@ -10,7 +10,6 @@ import {
   onBeforeUnmount,
   onUnmounted,
 } from 'vue'
-import './HijoCicloVida.css'
 
 const emit = defineEmits(['hook'])
 
@@ -76,3 +75,70 @@ onUnmounted(() => {
     </p>
   </div>
 </template>
+
+<style scoped>
+/* ==========================================================================
+   HijoCicloVida — componente hijo real de la Demo 04
+   Vive y muere con v-if; reporta cada hook al padre vía emit.
+   ========================================================================== */
+
+.hijo-cv {
+  border: var(--border-thick);
+  background: var(--color-sepia);
+  padding: var(--space-2);
+  box-shadow: var(--shadow-hard);
+  width: 100%;
+}
+
+.hijo-cv__titulo {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-paper-dark);
+  margin-bottom: var(--space-1);
+}
+
+.hijo-cv__loading {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-orange);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* Único radio permitido: el spinner es un círculo por definición */
+.hijo-cv__spinner {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-orange);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: gira 600ms linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes gira {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hijo-cv__dato {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-electric);
+  background: var(--color-paper);
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-thick);
+}
+
+.hijo-cv__nota {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--color-paper-dark);
+  margin-top: var(--space-1);
+  line-height: 1.5;
+}
+</style>

@@ -6,7 +6,6 @@
 // con side effects. El botón de caché lee total.value en un loop y
 // demuestra que los contadores no se mueven.
 import { ref, computed, watch } from 'vue'
-import './DemoComputed.css'
 
 const precio = ref(50)
 const cantidad = ref(3)
@@ -201,3 +200,258 @@ function leerTotal10Veces() {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* ==========================================================================
+   DemoComputed — Demo 02: Computed y el grafo de dependencias
+   Sliders custom brutalistas + grafo de nodos + demostración de caché.
+   ========================================================================== */
+
+.demo-cp {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.demo-cp__hint {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #8a8f9c;
+}
+
+/* --------------------------------------------------------
+   Inputs: sliders custom y toggle
+-------------------------------------------------------- */
+.demo-cp__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.demo-cp__slider-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 60px;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.demo-cp__slider-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+}
+
+/* Slider suavizado */
+.demo-cp__slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  background: var(--color-sepia);
+  border: 1px solid rgba(156, 158, 165, 0.3);
+  border-radius: 4px;
+  outline: none;
+}
+
+.demo-cp__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--color-orange);
+  border: 2px solid var(--color-paper);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.demo-cp__slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--color-orange);
+  border: 2px solid var(--color-paper);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.demo-cp__slider-valor {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  text-align: right;
+}
+
+/* Toggle cuadrado de envío gratis */
+.demo-cp__toggle-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.demo-cp__toggle-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.demo-cp__toggle {
+  width: 2.4rem;
+  height: 1.3rem;
+  background: var(--color-sepia);
+  border: 1.5px solid var(--color-paper);
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.demo-cp__toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(1.3rem - 8px);
+  height: calc(1.3rem - 8px);
+  background: var(--color-paper);
+  transition: transform 200ms ease;
+}
+
+.demo-cp__toggle:checked {
+  background: var(--color-electric);
+}
+
+.demo-cp__toggle:checked::after {
+  transform: translateX(1.1rem);
+}
+
+/* --------------------------------------------------------
+   Grafo visual de dependencias
+-------------------------------------------------------- */
+.demo-cp__grafo {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.demo-cp__col-izq {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.demo-cp__col-der {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.demo-cp__nodo {
+  border: 1.5px solid var(--color-paper);
+  border-radius: 6px;
+  background: var(--color-ink);
+  padding: var(--space-1) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.demo-cp__nodo--computed {
+  border: 2px solid var(--color-paper);
+  border-radius: 6px;
+  background: var(--color-sepia);
+}
+
+.demo-cp__nodo--flash {
+  animation: nodo-flash 350ms ease-out;
+}
+
+@keyframes nodo-flash {
+  0% {
+    background: var(--color-ink);
+  }
+
+  30% {
+    background: var(--color-electric);
+  }
+
+  100% {
+    background: var(--color-ink);
+  }
+}
+
+.demo-cp__nodo-tipo {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-paper-dark);
+}
+
+.demo-cp__nodo-valor {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  line-height: 1;
+  color: var(--color-paper);
+}
+
+.demo-cp__nodo-cont {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--color-orange);
+}
+
+.demo-cp__flecha {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--color-orange);
+  user-select: none;
+  text-align: center;
+}
+
+/* --------------------------------------------------------
+   Zona de caché: botón + mensaje
+-------------------------------------------------------- */
+.demo-cp__cache-zona {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.demo-cp__cache-msg {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--color-electric);
+  background: var(--color-paper);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid rgba(32, 33, 39, 0.5);
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.demo-cp__cache-msg--visible {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------
+   Responsive
+-------------------------------------------------------- */
+@media (max-width: 720px) {
+  .demo-cp__grafo {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-cp__flecha {
+    transform: rotate(90deg);
+  }
+
+  .demo-cp__slider-row {
+    grid-template-columns: 90px 1fr 40px;
+  }
+}
+</style>
