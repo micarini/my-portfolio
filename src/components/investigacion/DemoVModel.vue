@@ -1,39 +1,11 @@
 <script setup>
 // Demo 03 — v-model, desarmado.
-// Dos inputs sobre el MISMO ref: uno con v-model (azúcar) y otro con
-// :value + @input (sintaxis expandida). Las flechas se iluminan según
-// la dirección del flujo: input → estado en cada tecla, estado → DOM
-// cuando Vue termina de actualizar (nextTick).
-import { ref, watch, nextTick } from 'vue'
+// Dos inputs sobre el MISMO ref: uno con v-model y otro con :value + @input.
+// Ambos están sincronizados porque comparten el mismo ref.
+import { ref } from 'vue'
 
 const texto = ref('Hola')
 const mostrarAzucar = ref(true) // controla cuál snippet se muestra (v-model vs expandido)
-
-// ref(false): estado booleano que activa/desactiva la clase CSS de la flecha
-const flechaEntrada = ref(false)
-const flechaSalida = ref(false)
-
-// se llama en @input: el usuario tecleó → el evento sube hacia el estado
-function encenderEntrada() {
-  flechaEntrada.value = true
-  setTimeout(() => {
-    flechaEntrada.value = false
-  }, 400)
-}
-
-// watch(texto): se ejecuta cada vez que el ref cambia de valor
-// En este punto el estado ya cambió, pero el DOM todavía no se actualizó
-watch(texto, () => {
-  // nextTick difiere la ejecución al siguiente ciclo de render de Vue,
-  // cuando el DOM ya refleja el nuevo valor. Eso representa el paso "estado → DOM".
-  // Sin nextTick, la flecha se encendería antes de que el DOM muestre el texto nuevo.
-  nextTick(() => {
-    flechaSalida.value = true
-    setTimeout(() => {
-      flechaSalida.value = false
-    }, 400)
-  })
-})
 </script>
 
 <template>
@@ -42,9 +14,9 @@ watch(texto, () => {
       Escribí en cualquiera de los dos: son el mismo ref visto desde dos sintaxis.
     </p>
 
-    <!-- Inputs sincronizados + estado central con flechas -->
+    <!-- Inputs sincronizados + estado central -->
     <div class="demo-vm__inputs">
-      <!-- Con azúcar -->
+      <!-- Con sugar syntax -->
       <div class="demo-vm__input-bloque">
         <span class="demo-vm__input-rotulo">v-model="texto"</span>
         <input
@@ -52,30 +24,15 @@ watch(texto, () => {
           class="demo-vm__input"
           type="text"
           aria-label="Input con v-model"
-          @input="encenderEntrada"
         >
       </div>
 
-      <!-- Flujo -->
-      <div class="demo-vm__flujo">
-        <!-- :class con objeto: aplica la clase solo si flechaEntrada es true -->
-        <span
-          class="demo-vm__flecha"
-          :class="{ 'demo-vm__flecha--activa': flechaEntrada }"
-          aria-hidden="true"
-        >→ estado</span>
-        <div class="demo-vm__estado">
-          ref texto
-          <span class="demo-vm__estado-valor">{{ texto }}</span>
-        </div>
-        <span
-          class="demo-vm__flecha"
-          :class="{ 'demo-vm__flecha--activa': flechaSalida }"
-          aria-hidden="true"
-        >estado →</span>
+      <div class="demo-vm__estado">
+        ref texto
+        <span class="demo-vm__estado-valor">{{ texto }}</span>
       </div>
 
-      <!-- Sin azúcar -->
+      <!-- Sin sugar syntax -->
       <div class="demo-vm__input-bloque">
         <span class="demo-vm__input-rotulo">:value="texto" @input="…"</span>
         <input
@@ -83,7 +40,7 @@ watch(texto, () => {
           class="demo-vm__input"
           type="text"
           aria-label="Input con :value y @input"
-          @input="texto = $event.target.value; encenderEntrada()"
+          @input="texto = $event.target.value"
         >
       </div>
     </div>
@@ -187,38 +144,7 @@ watch(texto, () => {
   box-shadow: 0 0 0 3px rgba(134, 128, 255, 0.2);
 }
 
-/* Columna central: flechas que se iluminan según la dirección del flujo */
-.demo-vm__flujo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-1);
-}
 
-.demo-vm__flecha {
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  font-weight: 700;
-  padding: 2px 8px;
-  border: 1.5px solid var(--color-paper);
-  border-radius: 4px;
-  background: var(--color-sepia);
-  color: var(--color-paper);
-  transition:
-    background 200ms ease,
-    color 200ms ease,
-    border-color 200ms ease;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.demo-vm__flecha--activa {
-  background: var(--color-orange);
-  color: var(--color-ink);
-  border-color: var(--color-orange);
-}
-
-/* Estado central visible entre las flechas */
 .demo-vm__estado {
   text-align: center;
   font-family: var(--font-mono);
@@ -238,9 +164,6 @@ watch(texto, () => {
   max-width: 16ch;
 }
 
-/* --------------------------------------------------------
-   Zona del snippet de código con toggle
--------------------------------------------------------- */
 .demo-vm__codigo-zona {
   display: flex;
   flex-direction: column;
@@ -292,7 +215,6 @@ watch(texto, () => {
   transform: translateX(1.1rem);
 }
 
-/* Bloque <pre> estilizado, highlighting con spans manuales */
 .demo-vm__pre {
   font-family: var(--font-mono);
   font-size: var(--text-small);
@@ -307,7 +229,6 @@ watch(texto, () => {
   max-width: 100%;
 }
 
-/* Paleta del syntax highlighting manual */
 .syn-tag {
   color: #88c0d0;
 }
@@ -325,18 +246,10 @@ watch(texto, () => {
   font-style: italic;
 }
 
-/* --------------------------------------------------------
-   Responsive
--------------------------------------------------------- */
 @media (max-width: 720px) {
   .demo-vm__inputs {
     grid-template-columns: 1fr;
   }
 
-  .demo-vm__flujo {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
 }
 </style>

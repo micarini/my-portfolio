@@ -57,8 +57,8 @@ import DemoVModel from './DemoVModel.vue'
             <p>
               Son dos pasos separados que siempre van en un solo sentido cada uno.
               No hay binding real en dos direcciones — hay un evento que sube y un
-              binding que baja. React eligió no ocultar eso; Vue eligió hacerlo
-              opcional con <code>v-model</code>. Debajo los dos funcionan igual.
+              binding que baja. <code>v-model</code> es la abreviatura que oculta
+              esos dos pasos; la sintaxis expandida los hace visibles.
             </p>
           </div>
         </div>

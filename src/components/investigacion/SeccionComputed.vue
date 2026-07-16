@@ -70,17 +70,6 @@ import DemoComputed from './DemoComputed.vue'
             </p>
           </div>
 
-          <div class="inv-dato-destacado">
-            <div class="inv-dato-num">0</div>
-            <div class="inv-dato-desc">
-              <span>
-                recálculos ejecuta un computed cuando se lo lee repetidamente
-                sin que cambien sus dependencias. La memorización no es una
-                optimización opcional: es el contrato de la API.
-              </span>
-              <small>Vue.js — "Computed Properties" (vuejs.org/guide)</small>
-            </div>
-          </div>
         </div>
       </div>
     </div>
