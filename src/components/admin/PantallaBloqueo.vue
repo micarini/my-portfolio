@@ -15,11 +15,6 @@ const emit = defineEmits(['reintentar'])
 <template>
   <div class="bloqueo-wrapper">
     <div class="bloqueo-bloque">
-      <!-- Marca de agua gigante de fondo -->
-      <span
-        class="bloqueo-bg-text"
-        aria-hidden="true"
-      >NO</span>
 
       <div class="bloqueo-contenido">
         <p class="bloqueo-codigo">
@@ -29,8 +24,6 @@ const emit = defineEmits(['reintentar'])
         <h1 class="bloqueo-titulo">
           Acceso<br>Restringido
         </h1>
-
-        <hr class="bloqueo-divisor">
 
         <p class="bloqueo-usuario">
           Usuario <span>{{ props.usuario.name }}</span> no tiene permisos de administrador.
@@ -45,7 +38,7 @@ const emit = defineEmits(['reintentar'])
           class="btn-brutal bloqueo-btn"
           @click="emit('reintentar')"
         >
-          ← Reintentar con otra cuenta
+          Reintentar con otra cuenta
         </button>
       </div>
     </div>
@@ -53,8 +46,6 @@ const emit = defineEmits(['reintentar'])
 </template>
 
 <style scoped>
-/* PantallaBloqueo — acceso restringido, look alineado con las demos */
-
 .bloqueo-wrapper {
   display: flex;
   align-items: center;
@@ -63,7 +54,6 @@ const emit = defineEmits(['reintentar'])
   padding: var(--space-4) var(--space-3);
 }
 
-/* Bloque dramático oscuro, redondeado, con sombra suave */
 .bloqueo-bloque {
   background: var(--color-sepia);
   border: 1px solid var(--glass-border);
@@ -75,24 +65,6 @@ const emit = defineEmits(['reintentar'])
   text-align: center;
   position: relative;
   overflow: hidden;
-}
-
-/* Marca de agua gigante (roja tenue) */
-.bloqueo-bg-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-display);
-  font-size: clamp(5rem, 20vw, 14rem);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.05em;
-  color: color-mix(in srgb, var(--color-surreal) 8%, transparent);
-  pointer-events: none;
-  white-space: nowrap;
-  line-height: 1;
-  user-select: none;
 }
 
 .bloqueo-contenido {
@@ -113,22 +85,16 @@ const emit = defineEmits(['reintentar'])
   font-weight: 700;
 }
 
-/* Texto gigante "ACCESO RESTRINGIDO" */
 .bloqueo-titulo {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 8vw, 5rem);
+  font-size: clamp(1.8rem, 5vw, 3rem);
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  line-height: 0.9;
+  line-height: 0.95;
   color: var(--color-surreal);
-}
-
-.bloqueo-divisor {
-  width: 100%;
-  height: 1px;
-  background: var(--glass-border);
-  border: none;
-  margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .bloqueo-usuario {

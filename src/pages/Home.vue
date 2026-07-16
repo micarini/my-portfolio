@@ -11,8 +11,11 @@ const proyectos = ref([]);
 // ── Filtro activo 
 const filtroActivo = ref('Todos');
 
-// ── Computed: categorías únicas extraídas de los datos 
+// ── Computed: categorías únicas extraídas de los datos
 const categorias = computed(() => {
+  // .map() extrae solo el campo categoria de cada proyecto → array con posibles duplicados.
+  // new Set() elimina los duplicados (un Set no puede tener valores repetidos).
+  // [...] convierte el Set de vuelta a array para poder usar .map(), .filter(), etc.
   const unicas = [...new Set(proyectos.value.map((p) => p.categoria))];
   return ['Todos', ...unicas];
 });
@@ -28,16 +31,20 @@ function retrasoEntrada(indice) {
   return `${Math.min(indice * 70, 560)}ms`;
 }
 
-// ── Carga asincrónica en onMounted 
+// onMounted acepta callbacks async. El await pausa la ejecución dentro del callback
+// pero no bloquea el render — Vue ya montó el componente y muestra el estado "loading".
 onMounted(async () => {
   try {
     const res = await fetch('/contenido.json');
+    // fetch() solo rechaza la promesa si hay error de red (sin conexión, CORS, etc.).
+    // Un 404 o 500 resuelve normalmente con res.ok = false, por eso hay que chequearlo a mano.
     if (!res.ok) throw new Error(`Error HTTP ${res.status}: ${res.statusText}`);
-    const datos = await res.json();
+    const datos = await res.json(); // .json() también es async: parsea el body del response
     proyectos.value = datos;
   } catch (e) {
     error.value = e.message || 'Error desconocido al cargar los proyectos.';
   } finally {
+    // finally corre siempre, haya error o no — el lugar correcto para apagar el loading
     loading.value = false;
   }
 });

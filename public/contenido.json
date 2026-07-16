@@ -5,6 +5,7 @@
     "categoria": "Web App",
     "anio": 2026,
     "imagen": "/proyectos/aera.png",
+    "url": "https://aerahabits.vercel.app/",
     "destacado": false
   },
   {
@@ -13,6 +14,7 @@
     "categoria": "Web App",
     "anio": 2026,
     "imagen": "/proyectos/soli.png",
+    "url": "https://solirecos.vercel.app/",
     "destacado": false
   },
   {
@@ -21,6 +23,7 @@
     "categoria": "Creative Coding",
     "anio": 2025,
     "imagen": "/proyectos/bauhaus-p5.png",
+    "url": "https://bauhaus-p5.vercel.app/",
     "destacado": true
   },
   {
@@ -29,6 +32,7 @@
     "categoria": "Web App",
     "anio": 2026,
     "imagen": "/proyectos/tmdb-explorer.png",
+    "url": "https://soli-next.vercel.app/",
     "destacado": false
   },
   {
@@ -37,6 +41,7 @@
     "categoria": "Full Branding",
     "anio": 2026,
     "imagen": "/proyectos/codifun.png",
+    "url": "https://www.figma.com/proto/MkfCwsJcNIXvHuDlHqpXz9/Pantallas-CodiFun-Final?team_id=1408805131826647852&node-id=488-350&page-id=488%3A349&starting-point-node-id=488%3A413&show-proto-sidebar=1&t=fyPdu1JU2g2vHtnR-1",
     "destacado": false
   },
   {
@@ -45,6 +50,7 @@
     "categoria": "Web App",
     "anio": 2026,
     "imagen": "/proyectos/kitchenlogs.png",
+    "url": "https://next-kitchenlogs.vercel.app/",
     "destacado": true
   }
 ]

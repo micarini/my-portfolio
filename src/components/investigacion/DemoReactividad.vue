@@ -1,56 +1,34 @@
 <script setup>
 // Demo 01 — La reactividad por Proxy.
-// Un ref central ("nombre") con tres suscriptores reales: la interpolación
-// del template, un computed derivado y un watcher. El watch registra cada
-// SET en un log estilo terminal y dispara las animaciones de notificación.
+// Un ref central ("nombre") con tres suscriptores reales: la interpolación del template,
+// un computed derivado y un watcher. El watch registra cada SET en un log estilo terminal.
+
 import { ref, computed, watch, nextTick } from 'vue'
 
 const nombre = ref('Vue')
 
-// Rótulo con las llaves de interpolación, definido acá porque
-// escribir "{{" literal dentro del template rompe el parser
+// Definido acá porque escribir "{{" literal en el template rompe el parser de Vue
 const rotuloInterp = 'Interpolación {{ nombre }}'
-
-// Cambiar esta clave fuerza a Vue a recrear el nodo del estado,
-// lo que reinicia la animación CSS de pulso en cada tecla.
-const pulseClave = ref(0)
 
 const contadorTeclas = ref(0)
 const contadorDOM = ref(0)
 const log = ref([])
-const logEl = ref(null)
+const logEl = ref(null) // ref al DOM: permite hacer scroll al contenedor del log
 
-// Suscriptor 2: computed derivado (saludo en mayúsculas)
+// Suscriptor 2: computed derivado
 const computedValor = computed(() => nombre.value.toUpperCase())
 
 // Suscriptor 3: watcher que guarda el último valor observado
 const watcherValor = ref(nombre.value)
 
-// Flags de flash por suscriptor (reactivan la animación CSS)
-const flashInterp = ref(false)
-const flashComputed = ref(false)
-const flashWatcher = ref(false)
-
-function dispararFlash(refFlash) {
-  refFlash.value = false
-  // Forzar reflow para que el navegador reinicie la animación
-  void document.body.offsetHeight
-  refFlash.value = true
-  setTimeout(() => {
-    refFlash.value = false
-  }, 400)
-}
-
 watch(nombre, (nuevo) => {
-  pulseClave.value++
   contadorTeclas.value++
   contadorDOM.value++
   watcherValor.value = nuevo
   const entrada = `set nombre = "${nuevo}" → notificando 3 suscriptores`
+  // slice(-4): últimos 4 elementos. El spread [...] crea un array nuevo para que Vue detecte el cambio.
   log.value = [...log.value.slice(-4), entrada]
-  dispararFlash(flashInterp)
-  dispararFlash(flashComputed)
-  dispararFlash(flashWatcher)
+  // nextTick: espera a que Vue actualice el DOM antes de hacer scroll
   nextTick(() => {
     if (logEl.value) logEl.value.scrollTop = logEl.value.scrollHeight
   })
@@ -60,7 +38,7 @@ watch(nombre, (nuevo) => {
 <template>
   <div class="demo-rx">
     <p class="demo-rx__hint">
-      Escribí acá y mirá la columna de al lado: cada tecla es un SET que el Proxy intercepta.
+      Escribí acá y mirá la columna de abajo: cada tecla es un SET que el Proxy intercepta.
     </p>
 
     <div class="demo-rx__input-row">
@@ -75,11 +53,7 @@ watch(nombre, (nuevo) => {
     </div>
 
     <div class="demo-rx__grafo">
-      <!-- Estado central: el :key cambia en cada SET y reinicia el pulso -->
-      <div
-        :key="pulseClave"
-        class="demo-rx__estado demo-rx__estado--pulso"
-      >
+      <div class="demo-rx__estado">
         <span class="demo-rx__estado-label">Estado (Proxy)</span>
         <span class="demo-rx__estado-valor">{{ nombre }}</span>
       </div>
@@ -93,31 +67,21 @@ watch(nombre, (nuevo) => {
 
       <!-- Los tres suscriptores -->
       <div class="demo-rx__suscriptores">
-        <div
-          class="demo-rx__suscriptor"
-          :class="{ 'demo-rx__suscriptor--flash': flashInterp }"
-        >
+        <div class="demo-rx__suscriptor">
           <span class="demo-rx__suscriptor-tipo">{{ rotuloInterp }}</span>
           <span class="demo-rx__suscriptor-valor">{{ nombre }}</span>
         </div>
-        <div
-          class="demo-rx__suscriptor"
-          :class="{ 'demo-rx__suscriptor--flash': flashComputed }"
-        >
+        <div class="demo-rx__suscriptor">
           <span class="demo-rx__suscriptor-tipo">Computed (mayúsculas)</span>
           <span class="demo-rx__suscriptor-valor">{{ computedValor }}</span>
         </div>
-        <div
-          class="demo-rx__suscriptor"
-          :class="{ 'demo-rx__suscriptor--flash': flashWatcher }"
-        >
+        <div class="demo-rx__suscriptor">
           <span class="demo-rx__suscriptor-tipo">Watcher (último valor)</span>
           <span class="demo-rx__suscriptor-valor">{{ watcherValor }}</span>
         </div>
       </div>
     </div>
 
-    <!-- Log estilo terminal -->
     <div
       ref="logEl"
       class="demo-rx__log"
@@ -153,10 +117,6 @@ watch(nombre, (nuevo) => {
 </template>
 
 <style scoped>
-/* ==========================================================================
-   DemoReactividad — Demo 01: La reactividad por Proxy
-   Un input alimenta un estado central que notifica a tres suscriptores.
-   ========================================================================== */
 
 .demo-rx {
   display: flex;
@@ -203,9 +163,6 @@ watch(nombre, (nuevo) => {
   box-shadow: 0 0 0 3px rgba(134, 128, 255, 0.2);
 }
 
-/* --------------------------------------------------------
-   Diagrama vivo: estado central → suscriptores
--------------------------------------------------------- */
 .demo-rx__grafo {
   display: grid;
   grid-template-columns: 1fr auto 1.2fr;
@@ -240,28 +197,7 @@ watch(nombre, (nuevo) => {
   word-break: break-all;
 }
 
-/* Pulso del estado en cada SET: se reactiva cambiando el :key del nodo */
-@keyframes pulso {
-  0% {
-    box-shadow: var(--shadow-hard);
-  }
 
-  40% {
-    box-shadow:
-      0 0 0 4px var(--color-electric),
-      var(--shadow-hard);
-  }
-
-  100% {
-    box-shadow: var(--shadow-hard);
-  }
-}
-
-.demo-rx__estado--pulso {
-  animation: pulso 300ms ease-out;
-}
-
-/* Conectores centrales: ondas que viajan hacia los suscriptores */
 .demo-rx__conectores {
   display: flex;
   flex-direction: column;
@@ -310,28 +246,7 @@ watch(nombre, (nuevo) => {
   word-break: break-all;
 }
 
-/* Flash del suscriptor al recibir la notificación del Proxy */
-@keyframes flash-suscriptor {
-  0% {
-    background: var(--color-ink);
-  }
 
-  30% {
-    background: var(--color-electric);
-  }
-
-  100% {
-    background: var(--color-ink);
-  }
-}
-
-.demo-rx__suscriptor--flash {
-  animation: flash-suscriptor 350ms ease-out;
-}
-
-/* --------------------------------------------------------
-   Log estilo terminal
--------------------------------------------------------- */
 .demo-rx__log {
   background: var(--color-paper);
   border: 1px solid rgba(32, 33, 39, 0.5);
@@ -370,9 +285,6 @@ watch(nombre, (nuevo) => {
   }
 }
 
-/* --------------------------------------------------------
-   Contadores comparativos: teclas vs. actualizaciones del DOM
--------------------------------------------------------- */
 .demo-rx__contadores {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -415,10 +327,6 @@ watch(nombre, (nuevo) => {
   line-height: 1.5;
   color: #7b808d;
 }
-
-/* --------------------------------------------------------
-   Responsive
--------------------------------------------------------- */
 @media (max-width: 720px) {
   .demo-rx__grafo {
     grid-template-columns: 1fr;

@@ -17,7 +17,7 @@ const props = defineProps({
 // El padre escucha estos eventos para mutar su ref y registrar la auditoría
 const emit = defineEmits(['crear', 'editar', 'borrar', 'auditoria'])
 
-// ─── Estado del formulario ────────────────────────────────────────────────
+// Estado del formulario 
 const FORM_VACIO = {
   name: '',
   email: '',
@@ -36,7 +36,7 @@ const formEditar = reactive({ ...FORM_VACIO })
 // Confirmación de borrado inline (no window.confirm)
 const confirmandoBorrarNombre = ref(null)
 
-// ─── Helpers ──────────────────────────────────────────────────────────────
+// Helpers para formatear fechas y obtener la fecha de hoy en ISO
 function hoyISO() {
   return new Date().toISOString().slice(0, 10) // YYYY-MM-DD
 }
@@ -47,7 +47,7 @@ function formatFecha(fechaISO) {
   return `${dia}/${mes}/${anio}`
 }
 
-// ─── Crear ────────────────────────────────────────────────────────────────
+// Crear 
 function abrirFormCrear() {
   Object.assign(formCrear, FORM_VACIO)
   mostrarFormCrear.value = true
@@ -66,8 +66,7 @@ function submitCrear() {
     email: formCrear.email.trim(),
     isSubscribed: formCrear.isSubscribed,
     isAdmin: formCrear.isAdmin,
-    registerDate: hoyISO(),
-    likedPostIDs: []
+    registerDate: hoyISO()
   }
 
   // POO: se instancia AdminRequest ante cada operación (entity 'usuarios')
@@ -78,7 +77,7 @@ function submitCrear() {
   mostrarFormCrear.value = false
 }
 
-// ─── Editar ───────────────────────────────────────────────────────────────
+// Editar
 function abrirEditar(usuario) {
   editandoNombre.value = usuario.name
   Object.assign(formEditar, {
@@ -114,7 +113,7 @@ function submitEditar(usuario) {
   editandoNombre.value = null
 }
 
-// ─── Borrar ───────────────────────────────────────────────────────────────
+// Borrar
 function pedirConfirmacion(name) {
   confirmandoBorrarNombre.value = name
   editandoNombre.value = null
@@ -146,7 +145,7 @@ function confirmarBorrar(usuario) {
       </button>
     </div>
 
-    <!-- ── Formulario de creación ─────────────────────────── -->
+    <!-- Formulario de creación -->
     <div
       v-if="mostrarFormCrear"
       class="tu-form-panel"
@@ -236,7 +235,7 @@ function confirmarBorrar(usuario) {
       </form>
     </div>
 
-    <!-- ── Tabla de usuarios ──────────────────────────────── -->
+    <!-- Tabla de usuarios -->
     <div class="tabla-overflow">
       <table class="tabla-brutal">
         <thead>
@@ -246,7 +245,6 @@ function confirmarBorrar(usuario) {
             <th>Admin</th>
             <th>Suscrito</th>
             <th>Registro</th>
-            <th>Likes</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -288,9 +286,6 @@ function confirmarBorrar(usuario) {
               </td>
               <td class="tabla-celda--fecha">
                 {{ formatFecha(usuario.registerDate) }}
-              </td>
-              <td class="tabla-celda--num">
-                {{ usuario.likedPostIDs?.length ?? 0 }}
               </td>
               <td class="tu-celda--acciones">
                 <!-- Confirmar borrado inline -->
@@ -436,8 +431,6 @@ function confirmarBorrar(usuario) {
 </template>
 
 <style scoped>
-/* TablaUsuarios — CRUD de usuarios, look alineado con las demos */
-
 .tabla-wrapper {
   width: 100%;
   display: flex;
@@ -450,7 +443,6 @@ function confirmarBorrar(usuario) {
   justify-content: flex-end;
 }
 
-/* Contenedor redondeado con borde fino; scroll horizontal en mobile */
 .tabla-overflow {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -544,7 +536,6 @@ function confirmarBorrar(usuario) {
   width: 60px;
 }
 
-/* Badge admin: pill celeste */
 .tabla-badge {
   font-family: var(--font-mono);
   font-size: var(--text-micro);
@@ -560,7 +551,6 @@ function confirmarBorrar(usuario) {
   color: var(--color-primary);
 }
 
-/* Estado sí/no: pills */
 .tabla-status {
   display: inline-block;
   font-family: var(--font-mono);
@@ -593,7 +583,6 @@ function confirmarBorrar(usuario) {
   letter-spacing: 0.1em;
 }
 
-/* ── Acciones por fila ── */
 .tu-celda--acciones {
   white-space: nowrap;
   width: 150px;
@@ -629,7 +618,6 @@ function confirmarBorrar(usuario) {
   padding: 0 !important;
 }
 
-/* ── Panel de formulario ── */
 .tu-form-panel {
   border: 1px solid var(--glass-border);
   border-radius: 14px;
@@ -668,7 +656,6 @@ function confirmarBorrar(usuario) {
   letter-spacing: 0.06em;
 }
 
-/* ── Campos ── */
 .tu-form {
   display: flex;
   flex-direction: column;
@@ -718,7 +705,6 @@ function confirmarBorrar(usuario) {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
 }
 
-/* ── Checkboxes ── */
 .tu-form-checks {
   display: flex;
   gap: var(--space-3);
@@ -744,7 +730,6 @@ function confirmarBorrar(usuario) {
   cursor: pointer;
 }
 
-/* ── Submit ── */
 .tu-form-submit {
   display: flex;
   gap: var(--space-2);
@@ -753,7 +738,6 @@ function confirmarBorrar(usuario) {
   border-top: 1px solid var(--glass-border);
 }
 
-/* ── Botones (override del .btn-brutal global → look limpio) ── */
 .btn-brutal {
   font-family: var(--font-mono);
   font-weight: 700;

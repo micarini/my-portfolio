@@ -1,18 +1,26 @@
 <script setup>
+// defineProps declara qué datos espera recibir este componente desde el padre.
+// El padre los pasa como atributo: <ProjectCard :proyecto="unObjeto" />
 defineProps({
   proyecto: {
     type: Object,
-    required: true,
+    required: true, // Vue avisa en consola si el padre no lo pasa
   },
 });
 </script>
 
 <template>
-  <article
+  <a
     class="project-card"
     :class="{ 'project-card--destacado': proyecto.destacado }"
+    :href="proyecto.url"
+    target="_blank"
+    rel="noopener noreferrer"
   >
+    <!-- rel="noopener noreferrer": sin esto la página destino puede acceder a window.opener
+         y redirigir esta pestaña (ataque tabnapping). Siempre en links externos. -->
     <div class="project-card__imagen-wrap">
+      <!-- loading="lazy": el browser descarga la imagen solo cuando está por entrar al viewport -->
       <img
         :src="proyecto.imagen"
         :alt="proyecto.titulo"
@@ -24,13 +32,15 @@ defineProps({
       <h2 class="project-card__titulo">{{ proyecto.titulo }}</h2>
       <span class="project-card__categoria">{{ proyecto.categoria }}</span>
     </div>
-  </article>
+  </a>
 </template>
 
 <style scoped>
 .project-card {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .project-card__imagen-wrap {

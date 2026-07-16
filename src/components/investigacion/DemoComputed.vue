@@ -22,7 +22,8 @@ const flashEnvio = ref(false)
 
 function flash(r) {
   r.value = false
-  // Forzar reflow para reiniciar la animación CSS
+  // Leer offsetHeight fuerza un reflow del navegador, reiniciando la animación CSS.
+  // Sin esto, si la clase ya estaba aplicada, el browser omite el reflow y no se re-anima.
   void document.body.offsetHeight
   r.value = true
   setTimeout(() => {
@@ -30,11 +31,15 @@ function flash(r) {
   }, 400)
 }
 
-// Los computed reales: puros, memorizados, con caché
+// computed: función pura que Vue memoriza. Solo recalcula cuando alguna de sus
+// dependencias (refs que lee) cambia. Las lecturas repetidas devuelven la caché.
 const subtotal = computed(() => precio.value * cantidad.value)
+// total depende de subtotal Y de envioGratis. El operador ternario (? :) es
+// "si envioGratis es true, sumar 0; si no, sumar 9.99"
 const total = computed(() => subtotal.value + (envioGratis.value ? 0 : 9.99))
 
-// Contadores de recálculo: espejan exactamente cuándo Vue invalida la caché
+// Los watchers van separados del computed a propósito: un computed no debería
+// tener side effects (modificar estado externo). Los contadores los llevamos acá.
 watch(precio, () => {
   contRecalcSubtotal.value++
   contRecalcTotal.value++
@@ -60,9 +65,9 @@ watch(envioGratis, () => {
 const lecturasMostradas = ref(false)
 
 function leerTotal10Veces() {
-  // Diez accesos consecutivos al computed sin tocar sus dependencias:
-  // Vue devuelve el valor cacheado las diez veces, sin recalcular nada.
   for (let i = 0; i < 10; i++) {
+    // void descarta el valor — solo nos importa que Vue registre la lectura.
+    // Como ninguna dependencia cambió, las 10 lecturas devuelven la caché.
     void total.value
   }
   lecturasMostradas.value = true

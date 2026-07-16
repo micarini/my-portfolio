@@ -7,11 +7,13 @@
 import { ref, watch, nextTick } from 'vue'
 
 const texto = ref('Hola')
-const mostrarAzucar = ref(true)
+const mostrarAzucar = ref(true) // controla cuál snippet se muestra (v-model vs expandido)
 
+// ref(false): estado booleano que activa/desactiva la clase CSS de la flecha
 const flechaEntrada = ref(false)
 const flechaSalida = ref(false)
 
+// se llama en @input: el usuario tecleó → el evento sube hacia el estado
 function encenderEntrada() {
   flechaEntrada.value = true
   setTimeout(() => {
@@ -19,9 +21,12 @@ function encenderEntrada() {
   }, 400)
 }
 
+// watch(texto): se ejecuta cada vez que el ref cambia de valor
+// En este punto el estado ya cambió, pero el DOM todavía no se actualizó
 watch(texto, () => {
-  // nextTick: la flecha de salida se enciende recién cuando el DOM
-  // ya refleja el nuevo valor — ese es el "estado → vista" real.
+  // nextTick difiere la ejecución al siguiente ciclo de render de Vue,
+  // cuando el DOM ya refleja el nuevo valor. Eso representa el paso "estado → DOM".
+  // Sin nextTick, la flecha se encendería antes de que el DOM muestre el texto nuevo.
   nextTick(() => {
     flechaSalida.value = true
     setTimeout(() => {
@@ -53,6 +58,7 @@ watch(texto, () => {
 
       <!-- Flujo -->
       <div class="demo-vm__flujo">
+        <!-- :class con objeto: aplica la clase solo si flechaEntrada es true -->
         <span
           class="demo-vm__flecha"
           :class="{ 'demo-vm__flecha--activa': flechaEntrada }"
@@ -96,7 +102,7 @@ watch(texto, () => {
           class="demo-vm__toggle-label"
           for="azucar-toggle"
         >
-          VER EL AZÚCAR: {{ mostrarAzucar ? 'v-model (azúcar)' : 'sintaxis expandida' }}
+          VER EL SUGAR SYNTAX: {{ mostrarAzucar ? 'v-model (sugar syntax)' : 'sintaxis expandida' }}
         </label>
       </div>
 
@@ -105,7 +111,7 @@ watch(texto, () => {
         v-if="mostrarAzucar"
         class="demo-vm__pre"
         aria-label="Código con v-model"
-      ><span class="syn-cmnt">&lt;!-- azúcar sintáctico --&gt;</span>
+      ><span class="syn-cmnt">&lt;!-- sugar syntax --&gt;</span>
 <span class="syn-tag">&lt;input</span>
   <span class="syn-attr">v-model</span>=<span class="syn-val">"texto"</span>
 <span class="syn-tag">/&gt;</span></pre>
@@ -115,25 +121,20 @@ watch(texto, () => {
         v-else
         class="demo-vm__pre"
         aria-label="Código expandido equivalente"
-      ><span class="syn-cmnt">&lt;!-- equivalente, sin azúcar --&gt;</span>
+      ><span class="syn-cmnt">&lt;!-- equivalente, expandido --&gt;</span>
 <span class="syn-tag">&lt;input</span>
   <span class="syn-attr">:value</span>=<span class="syn-val">"texto"</span>
   <span class="syn-attr">@input</span>=<span class="syn-val">"texto = $event.target.value"</span>
 <span class="syn-tag">/&gt;</span>
 
 <span class="syn-cmnt">&lt;!-- v-model = binding (:value) + evento (@input).
-     El "two-way" es azúcar: el flujo real siempre es
+     El "two-way" es sugar syntax: el flujo real siempre es
      input → estado → DOM, unidireccional. --&gt;</span></pre>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* ==========================================================================
-   DemoVModel — Demo 03: v-model, desarmado
-   Dos inputs sobre el mismo ref + flechas de flujo + snippet con toggle.
-   ========================================================================== */
-
 .demo-vm {
   display: flex;
   flex-direction: column;
@@ -147,10 +148,6 @@ watch(texto, () => {
   line-height: 1.5;
   color: #8a8f9c;
 }
-
-/* --------------------------------------------------------
-   Los dos inputs sincronizados con el estado central
--------------------------------------------------------- */
 .demo-vm__inputs {
   display: grid;
   grid-template-columns: 1fr auto 1fr;

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 // Eventos hacia el padre
-const emit = defineEmits(['login-exitoso', 'acceso-restringido'])
+const emit = defineEmits(['login-exitoso', 'acceso-restringido']) 
 
 // Estado del formulario
 const usuario = ref('')
@@ -10,42 +10,39 @@ const contrasena = ref('')
 const error = ref('')
 const cargando = ref(false)
 
-/**
- * Maneja el submit del formulario.
- * Hace fetch async de /usuarios.json, busca credenciales y emite
- * el evento correspondiente según el resultado.
- */
+/*Maneja el submit del formulario.
+ Hace fetch async de /usuarios.json, busca credenciales y emite el evento correspondiente según el resultado.*/
 async function handleSubmit() {
-  error.value = ''
-  cargando.value = true
+  error.value = '' // resetea el error previo
+  cargando.value = true // activa el estado de carga (deshabilita el botón y cambia su texto)
 
   try {
-    const respuesta = await fetch('/usuarios.json')
-    if (!respuesta.ok) throw new Error('No se pudo cargar la base de usuarios.')
+    const respuesta = await fetch('/usuarios.json') //cargo la base de usuarios desde el JSON local
+    if (!respuesta.ok) throw new Error('No se pudo cargar la base de usuarios.') //manejo de error si la respuesta no es OK
 
-    const usuarios = await respuesta.json()
+    const usuarios = await respuesta.json() //parseo del JSON a objeto JS
 
     const encontrado = usuarios.find(
-      (u) => u.name === usuario.value && u.password === contrasena.value
+      (u) => u.name === usuario.value && u.password === contrasena.value //busca un usuario que coincida con las credenciales ingresadas
     )
 
-    if (!encontrado) {
+    if (!encontrado) { // si no se encuentra un usuario que coincida, se muestra un mensaje de error
       error.value = 'Credenciales inválidas. Revisá usuario y contraseña.'
       return
     }
 
     if (!encontrado.isAdmin) {
-      // Usuario existe pero no tiene permisos de admin
+      // si el usuario encontrado no es admin, se emite un evento de acceso restringido
       emit('acceso-restringido', encontrado)
       return
     }
 
-    // Admin legítimo
+    // si el usuario encontrado es admin, se emite un evento de login exitoso
     emit('login-exitoso', encontrado)
   } catch (e) {
-    error.value = 'Error al verificar credenciales: ' + e.message
+    error.value = 'Error al verificar credenciales: ' + e.message // muestra un mensaje de error si ocurre un error durante el fetch o el parseo del JSON
   } finally {
-    cargando.value = false
+    cargando.value = false // desactiva el estado de carga (habilita el botón y restaura su texto)
   }
 }
 </script>
@@ -62,7 +59,7 @@ async function handleSubmit() {
 
       <form
         class="login-form"
-        @submit.prevent="handleSubmit"
+        @submit.prevent="handleSubmit" 
       >
         <div class="login-campo">
           <label
@@ -96,7 +93,7 @@ async function handleSubmit() {
           >
         </div>
 
-        <!-- Error de credenciales — feedback inmediato en el mismo form -->
+        <!-- si hay error de credenciales emito feedback inmediato en el mismo form -->
         <div
           v-if="error"
           class="login-error"
@@ -122,8 +119,6 @@ async function handleSubmit() {
 </template>
 
 <style scoped>
-/* LoginForm — autenticación admin, look alineado con las demos */
-
 .login-wrapper {
   display: flex;
   align-items: center;
@@ -132,7 +127,6 @@ async function handleSubmit() {
   padding: var(--space-4) var(--space-3);
 }
 
-/* Ficha: superficie redondeada con sombra suave */
 .login-ficha {
   width: 100%;
   max-width: 420px;
@@ -206,7 +200,6 @@ async function handleSubmit() {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
 }
 
-/* Error: tinte suave legible */
 .login-error {
   display: flex;
   align-items: flex-start;
@@ -243,7 +236,6 @@ async function handleSubmit() {
   cursor: not-allowed;
 }
 
-/* Botón (override del .btn-brutal global → look limpio) */
 .btn-brutal {
   font-family: var(--font-mono);
   font-weight: 700;
