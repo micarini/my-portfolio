@@ -29,9 +29,7 @@ import SeccionCicloVida from '../components/investigacion/SeccionCicloVida.vue'
         </p>
         <p class="inv-intro-text">
           Lo más interesante pasa debajo de todo: Proxies de JavaScript que
-          interceptan lecturas y escrituras del estado. Un Proxy es un envoltorio (wrapper) alrededor de un objeto que redirige las operaciones en el hacia el objeto, Cuando algo lee un
-          valor, Vue lo registra. Cuando ese valor cambia, avisa exactamente
-          a quienes lo usaban. 
+          interceptan lecturas y escrituras del estado. Un Proxy es un envoltorio (wrapper) alrededor de un objeto que redirige las operaciones en el hacia el objeto, Cuando algo lee un valor, Vue lo registra. Cuando ese valor cambia, avisa exactamente a quienes lo usaban. 
         </p>
       </div>
     </div>
@@ -45,7 +43,7 @@ import SeccionCicloVida from '../components/investigacion/SeccionCicloVida.vue'
   <footer class="inv-biblio">
     <div class="container">
       <p class="inv-biblio-titulo">
-        — BIBLIOGRAFÍA / REFERENCIAS
+        BIBLIOGRAFÍA / REFERENCIAS
       </p>
       <ol class="inv-biblio-lista">
         <li>
@@ -422,13 +420,14 @@ import SeccionCicloVida from '../components/investigacion/SeccionCicloVida.vue'
 .syntax-tag       { color: #ff578a; }
 .syntax-attribute { color: #00c2f8; }
 
-.btn-brutal {
+/* botones dentro de los demos: override local sin afectar el resto del sitio */
+.inv-seccion .btn-brutal {
   border-radius: 6px;
   border: 1.5px solid var(--color-paper);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.btn-brutal:active {
+.inv-seccion .btn-brutal:active {
   transform: none;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
 }
